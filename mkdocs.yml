@@ -1,5 +1,9 @@
-site_name: Egzamin Ósmoklasisty - Język Polski
+site_name: Egzamin Ósmoklasisty
 site_description: Repozytorium materiałów i opracowań egzaminacyjnych.
+
+nav:
+  - Start: index.md
+  - Arkusze PDF: pdfs.md
 
 theme:
   name: material
@@ -34,3 +38,4 @@ plugins:
   - search
   - git-revision-date-localized:
       type: date
+      enable_parallel_processing: false
