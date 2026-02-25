@@ -58,29 +58,24 @@ def collect_notes(notes_root: Path) -> dict[str, dict[str, list[Path]]]:
     return grouped
 
 
-def render_markdown(grouped: dict[str, dict[str, list[Path]]], docs_root: Path, notes_root: Path) -> str:
+def render_subject_markdown(
+    subject: str,
+    years: dict[str, list[Path]],
+    *,
+    docs_root: Path,
+) -> str:
     lines: list[str] = []
-    lines.append("# Notatki i rozwiązania\n")
-    lines.append("Struktura: `docs/notes/<przedmiot>/<rok>/...` (nie miesza się z `docs/pdf/`).")
+    lines.append(f"# Notatki — {SUBJECT_DISPLAY.get(subject, subject)}\n")
+    lines.append("Struktura: `docs/notes/<przedmiot>/<rok>/...` (osobno od `docs/pdf/`).")
     lines.append("")
 
-    subjects = list(SUBJECT_DISPLAY.keys())
-    subjects += [s for s in sorted(grouped.keys()) if s not in SUBJECT_DISPLAY]
-
-    for subject in subjects:
-        if subject not in grouped:
-            continue
-        lines.append(f"## {SUBJECT_DISPLAY.get(subject, subject)}")
+    for year in sorted(years.keys(), key=_year_sort_key):
+        lines.append(f'???+ info "{year}"')
+        for md_path in sorted(years[year]):
+            rel_from_docs = md_path.relative_to(docs_root).as_posix()
+            title = _title_for_md(md_path)
+            lines.append(f"    - [{title}]({rel_from_docs})")
         lines.append("")
-
-        years = sorted(grouped[subject].keys(), key=_year_sort_key)
-        for year in years:
-            lines.append(f'???+ info "{year}"')
-            for md_path in sorted(grouped[subject][year]):
-                rel_from_docs = md_path.relative_to(docs_root).as_posix()
-                title = _title_for_md(md_path)
-                lines.append(f"    - [{title}]({rel_from_docs})")
-            lines.append("")
 
     return "\n".join(lines).rstrip() + "\n"
 
@@ -88,23 +83,40 @@ def render_markdown(grouped: dict[str, dict[str, list[Path]]], docs_root: Path, 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Generuje stronę MkDocs z linkami do notatek/rozwiązań.")
     ap.add_argument("--notes-root", default="docs/notes", help="Katalog z notatkami (domyślnie: docs/notes)")
-    ap.add_argument("--out", default="docs/notatki.md", help="Docelowy plik markdown (domyślnie: docs/notatki.md)")
+    ap.add_argument(
+        "--out-dir",
+        default="docs",
+        help="Katalog wyjściowy na strony indeksów (domyślnie: docs)",
+    )
     args = ap.parse_args()
 
     notes_root = Path(args.notes_root)
-    out_path = Path(args.out)
-    docs_root = out_path.parent
+    out_dir = Path(args.out_dir)
+    docs_root = out_dir
 
     if not notes_root.exists():
         raise SystemExit(f"Nie znaleziono katalogu notatek: {notes_root}")
 
     grouped = collect_notes(notes_root)
-    md = render_markdown(grouped, docs_root=docs_root, notes_root=notes_root)
-    out_path.write_text(md, encoding="utf-8")
-    print(f"Wygenerowano: {out_path}")
+
+    subjects = list(SUBJECT_DISPLAY.keys())
+    subjects += [s for s in sorted(grouped.keys()) if s not in SUBJECT_DISPLAY]
+
+    written = 0
+    for subject in subjects:
+        if subject not in grouped:
+            continue
+        md = render_subject_markdown(subject, grouped[subject], docs_root=docs_root)
+        out_path = out_dir / f"notatki-{subject}.md"
+        out_path.write_text(md, encoding="utf-8")
+        print(f"Wygenerowano: {out_path}")
+        written += 1
+
+    if written == 0:
+        raise SystemExit("Brak notatek do zindeksowania.")
+
     return 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
