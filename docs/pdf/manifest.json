@@ -2799,6 +2799,1406 @@
       "file": "pdf/jezyk-angielski/2025/jezyk-angielski-2025-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
       "status": "skip_exists",
       "ts": 1772037386
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2019",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-polski-2019/",
+      "title": "Egzamin ósmoklasisty język polski 2019 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2019-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2019/jezyk-polski-2019-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039141
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2019",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-polski-2019/",
+      "title": "Egzamin ósmoklasisty język polski 2019 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2019-egzamin-osmoklasisty.pdf",
+      "file": "pdf/jezyk-polski/2019/jezyk-polski-2019-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039141
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-polski-2020/",
+      "title": "Egzamin ósmoklasisty język polski 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2020-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2020/jezyk-polski-2020-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039142
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-polski-2020/",
+      "title": "Egzamin ósmoklasisty język polski 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2020-egzamin-osmoklasisty.pdf",
+      "file": "pdf/jezyk-polski/2020/jezyk-polski-2020-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039142
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-polski-2021/",
+      "title": "Egzamin ósmoklasisty język polski 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2021-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2021/jezyk-polski-2021-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039144
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-polski-2021/",
+      "title": "Egzamin ósmoklasisty język polski 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2021-egzamin-osmoklasisty.pdf",
+      "file": "pdf/jezyk-polski/2021/jezyk-polski-2021-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039144
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2022",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-polski-2022/",
+      "title": "Egzamin ósmoklasisty język polski 2022 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2022-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2022/jezyk-polski-2022-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039147
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2022",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-polski-2022/",
+      "title": "Egzamin ósmoklasisty język polski 2022 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2022-egzamin-osmoklasisty.pdf",
+      "file": "pdf/jezyk-polski/2022/jezyk-polski-2022-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039147
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2023",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-polski-2023/",
+      "title": "Egzamin ósmoklasisty język polski 2023 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2023-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2023/jezyk-polski-2023-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039150
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2023",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-polski-2023/",
+      "title": "Egzamin ósmoklasisty język polski 2023 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2023-egzamin-osmoklasisty.pdf",
+      "file": "pdf/jezyk-polski/2023/jezyk-polski-2023-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039150
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-polski-2024/",
+      "title": "Egzamin ósmoklasisty język polski 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2024-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2024/jezyk-polski-2024-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039153
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-polski-2024/",
+      "title": "Egzamin ósmoklasisty język polski 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2024-egzamin-osmoklasisty.pdf",
+      "file": "pdf/jezyk-polski/2024/jezyk-polski-2024-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039153
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2025",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-polski-2025/",
+      "title": "Egzamin ósmoklasisty język polski 2025 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2025-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2025/jezyk-polski-2025-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039155
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2025",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-polski-2025/",
+      "title": "Egzamin ósmoklasisty język polski 2025 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2025-egzamin-osmoklasisty.pdf",
+      "file": "pdf/jezyk-polski/2025/jezyk-polski-2025-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039155
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2017",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-polski-2017/",
+      "title": "Egzamin ósmoklasisty próbny język polski 2017 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2017-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2017/jezyk-polski-2017-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039157
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2017",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-polski-2017/",
+      "title": "Egzamin ósmoklasisty próbny język polski 2017 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2017-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/jezyk-polski/2017/jezyk-polski-2017-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039157
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2018",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-polski-2018/",
+      "title": "Egzamin ósmoklasisty próbny język polski 2018 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2018-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2018/jezyk-polski-2018-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039159
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2018",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-polski-2018/",
+      "title": "Egzamin ósmoklasisty próbny język polski 2018 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2018-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/jezyk-polski/2018/jezyk-polski-2018-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039159
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-polski-2020/",
+      "title": "Egzamin ósmoklasisty próbny język polski 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2020-marzec-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2020/jezyk-polski-2020-marzec-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039161
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-polski-2020/",
+      "title": "Egzamin ósmoklasisty próbny język polski 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2020-marzec-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/jezyk-polski/2020/jezyk-polski-2020-marzec-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039161
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-polski-2021/",
+      "title": "Egzamin ósmoklasisty próbny język polski 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2021-marzec-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2021/jezyk-polski-2021-marzec-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039163
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-polski-2021/",
+      "title": "Egzamin ósmoklasisty próbny język polski 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2021-marzec-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/jezyk-polski/2021/jezyk-polski-2021-marzec-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039163
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-polski-2024/",
+      "title": "Egzamin ósmoklasisty próbny język polski 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2024-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2024/jezyk-polski-2024-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039165
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-polski-2024/",
+      "title": "Egzamin ósmoklasisty próbny język polski 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2024-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/jezyk-polski/2024/jezyk-polski-2024-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039165
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2026",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-polski-2026/",
+      "title": "Egzamin ósmoklasisty próbny język polski 2026 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2026-styczen-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2026/jezyk-polski-2026-styczen-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039166
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2026",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-polski-2026/",
+      "title": "Egzamin ósmoklasisty próbny język polski 2026 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2026-styczen-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/jezyk-polski/2026/jezyk-polski-2026-styczen-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039166
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2019",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-polski-2019/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język polski 2019 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2019-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2019/jezyk-polski-2019-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039168
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2019",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-polski-2019/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język polski 2019 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2019-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/jezyk-polski/2019/jezyk-polski-2019-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039168
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-polski-2020/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język polski 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2020-lipiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2020/jezyk-polski-2020-lipiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039170
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-polski-2020/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język polski 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2020-lipiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/jezyk-polski/2020/jezyk-polski-2020-lipiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039170
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-polski-2021/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język polski 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2021-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2021/jezyk-polski-2021-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039171
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-polski-2021/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język polski 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2021-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/jezyk-polski/2021/jezyk-polski-2021-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039171
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2022",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-polski-2022/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język polski 2022 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2022-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2022/jezyk-polski-2022-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039174
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2022",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-polski-2022/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język polski 2022 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2022-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/jezyk-polski/2022/jezyk-polski-2022-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039174
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2023",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-polski-2023/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język polski 2023 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2023-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2023/jezyk-polski-2023-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039175
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2023",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-polski-2023/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język polski 2023 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2023-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/jezyk-polski/2023/jezyk-polski-2023-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039175
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-polski-2024/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język polski 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2024-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2024/jezyk-polski-2024-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039177
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-polski-2024/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język polski 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2024-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/jezyk-polski/2024/jezyk-polski-2024-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039177
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2025",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-polski-2025/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język polski 2025 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2025-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/jezyk-polski/2025/jezyk-polski-2025-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039178
+    },
+    {
+      "subject": "jezyk-polski",
+      "year": "2025",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-polski-2025/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język polski 2025 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-polski-2025-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/jezyk-polski/2025/jezyk-polski-2025-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039178
+    },
+    {
+      "subject": "matematyka",
+      "year": "2019",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-matematyka-2019/",
+      "title": "Egzamin ósmoklasisty matematyka 2019 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2019-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2019/matematyka-2019-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039184
+    },
+    {
+      "subject": "matematyka",
+      "year": "2019",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-matematyka-2019/",
+      "title": "Egzamin ósmoklasisty matematyka 2019 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2019-egzamin-osmoklasisty.pdf",
+      "file": "pdf/matematyka/2019/matematyka-2019-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039184
+    },
+    {
+      "subject": "matematyka",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-matematyka-2020/",
+      "title": "Egzamin ósmoklasisty matematyka 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2020-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2020/matematyka-2020-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039186
+    },
+    {
+      "subject": "matematyka",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-matematyka-2020/",
+      "title": "Egzamin ósmoklasisty matematyka 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2020-egzamin-osmoklasisty.pdf",
+      "file": "pdf/matematyka/2020/matematyka-2020-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039186
+    },
+    {
+      "subject": "matematyka",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-matematyka-2021/",
+      "title": "Egzamin ósmoklasisty matematyka 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2021-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2021/matematyka-2021-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039188
+    },
+    {
+      "subject": "matematyka",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-matematyka-2021/",
+      "title": "Egzamin ósmoklasisty matematyka 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2021-egzamin-osmoklasisty.pdf",
+      "file": "pdf/matematyka/2021/matematyka-2021-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039188
+    },
+    {
+      "subject": "matematyka",
+      "year": "2022",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-matematyka-2022/",
+      "title": "Egzamin ósmoklasisty matematyka 2022 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2022-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2022/matematyka-2022-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039189
+    },
+    {
+      "subject": "matematyka",
+      "year": "2022",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-matematyka-2022/",
+      "title": "Egzamin ósmoklasisty matematyka 2022 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2022-egzamin-osmoklasisty.pdf",
+      "file": "pdf/matematyka/2022/matematyka-2022-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039189
+    },
+    {
+      "subject": "matematyka",
+      "year": "2023",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-matematyka-2023/",
+      "title": "Egzamin ósmoklasisty matematyka 2023 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2023-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2023/matematyka-2023-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039191
+    },
+    {
+      "subject": "matematyka",
+      "year": "2023",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-matematyka-2023/",
+      "title": "Egzamin ósmoklasisty matematyka 2023 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2023-egzamin-osmoklasisty.pdf",
+      "file": "pdf/matematyka/2023/matematyka-2023-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039191
+    },
+    {
+      "subject": "matematyka",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-matematyka-2024/",
+      "title": "Egzamin ósmoklasisty matematyka 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2024-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2024/matematyka-2024-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039194
+    },
+    {
+      "subject": "matematyka",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-matematyka-2024/",
+      "title": "Egzamin ósmoklasisty matematyka 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2024-egzamin-osmoklasisty.pdf",
+      "file": "pdf/matematyka/2024/matematyka-2024-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039194
+    },
+    {
+      "subject": "matematyka",
+      "year": "2025",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-matematyka-2025/",
+      "title": "Egzamin ósmoklasisty matematyka 2025 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2025-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2025/matematyka-2025-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039197
+    },
+    {
+      "subject": "matematyka",
+      "year": "2025",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-matematyka-2025/",
+      "title": "Egzamin ósmoklasisty matematyka 2025 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2025-egzamin-osmoklasisty.pdf",
+      "file": "pdf/matematyka/2025/matematyka-2025-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039197
+    },
+    {
+      "subject": "matematyka",
+      "year": "2017",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-matematyka-2017/",
+      "title": "Egzamin ósmoklasisty próbny matematyka 2017 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2017-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2017/matematyka-2017-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039198
+    },
+    {
+      "subject": "matematyka",
+      "year": "2017",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-matematyka-2017/",
+      "title": "Egzamin ósmoklasisty próbny matematyka 2017 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2017-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/matematyka/2017/matematyka-2017-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039198
+    },
+    {
+      "subject": "matematyka",
+      "year": "2018",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-matematyka-2018/",
+      "title": "Egzamin ósmoklasisty próbny matematyka 2018 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2018-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2018/matematyka-2018-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039200
+    },
+    {
+      "subject": "matematyka",
+      "year": "2018",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-matematyka-2018/",
+      "title": "Egzamin ósmoklasisty próbny matematyka 2018 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2018-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/matematyka/2018/matematyka-2018-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039200
+    },
+    {
+      "subject": "matematyka",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-matematyka-2020/",
+      "title": "Egzamin ósmoklasisty próbny matematyka 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2020-marzec-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2020/matematyka-2020-marzec-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039201
+    },
+    {
+      "subject": "matematyka",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-matematyka-2020/",
+      "title": "Egzamin ósmoklasisty próbny matematyka 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2020-marzec-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/matematyka/2020/matematyka-2020-marzec-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039201
+    },
+    {
+      "subject": "matematyka",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-matematyka-2021/",
+      "title": "Egzamin ósmoklasisty próbny matematyka 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2021-marzec-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2021/matematyka-2021-marzec-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039203
+    },
+    {
+      "subject": "matematyka",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-matematyka-2021/",
+      "title": "Egzamin ósmoklasisty próbny matematyka 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2021-marzec-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/matematyka/2021/matematyka-2021-marzec-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039203
+    },
+    {
+      "subject": "matematyka",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-matematyka-2024/",
+      "title": "Egzamin ósmoklasisty próbny matematyka 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2024-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2024/matematyka-2024-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039205
+    },
+    {
+      "subject": "matematyka",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-matematyka-2024/",
+      "title": "Egzamin ósmoklasisty próbny matematyka 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2024-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/matematyka/2024/matematyka-2024-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039205
+    },
+    {
+      "subject": "matematyka",
+      "year": "2026",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-matematyka-2026/",
+      "title": "Egzamin ósmoklasisty próbny matematyka 2026 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2026-styczen-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2026/matematyka-2026-styczen-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039207
+    },
+    {
+      "subject": "matematyka",
+      "year": "2026",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-matematyka-2026/",
+      "title": "Egzamin ósmoklasisty próbny matematyka 2026 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2026-styczen-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/matematyka/2026/matematyka-2026-styczen-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039207
+    },
+    {
+      "subject": "matematyka",
+      "year": "2019",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-matematyka-2019/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy matematyka 2019 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2019-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2019/matematyka-2019-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039209
+    },
+    {
+      "subject": "matematyka",
+      "year": "2019",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-matematyka-2019/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy matematyka 2019 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2019-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/matematyka/2019/matematyka-2019-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039209
+    },
+    {
+      "subject": "matematyka",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-matematyka-2020/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy matematyka 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2020-lipiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2020/matematyka-2020-lipiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039211
+    },
+    {
+      "subject": "matematyka",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-matematyka-2020/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy matematyka 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2020-lipiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/matematyka/2020/matematyka-2020-lipiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039211
+    },
+    {
+      "subject": "matematyka",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-matematyka-2021/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy matematyka 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2021-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2021/matematyka-2021-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039213
+    },
+    {
+      "subject": "matematyka",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-matematyka-2021/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy matematyka 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2021-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/matematyka/2021/matematyka-2021-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039213
+    },
+    {
+      "subject": "matematyka",
+      "year": "2022",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-matematyka-2022/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy matematyka 2022 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2022-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2022/matematyka-2022-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039214
+    },
+    {
+      "subject": "matematyka",
+      "year": "2022",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-matematyka-2022/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy matematyka 2022 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2022-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/matematyka/2022/matematyka-2022-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039214
+    },
+    {
+      "subject": "matematyka",
+      "year": "2023",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-matematyka-2023/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy matematyka 2023 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2023-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2023/matematyka-2023-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039216
+    },
+    {
+      "subject": "matematyka",
+      "year": "2023",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-matematyka-2023/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy matematyka 2023 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2023-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/matematyka/2023/matematyka-2023-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039216
+    },
+    {
+      "subject": "matematyka",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-matematyka-2024/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy matematyka 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2024-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2024/matematyka-2024-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039218
+    },
+    {
+      "subject": "matematyka",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-matematyka-2024/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy matematyka 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2024-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/matematyka/2024/matematyka-2024-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039218
+    },
+    {
+      "subject": "matematyka",
+      "year": "2025",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-matematyka-2025/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy matematyka 2025 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2025-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/matematyka/2025/matematyka-2025-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039220
+    },
+    {
+      "subject": "matematyka",
+      "year": "2025",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-matematyka-2025/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy matematyka 2025 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/matematyka-2025-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/matematyka/2025/matematyka-2025-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039220
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2019",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2019/",
+      "title": "Egzamin ósmoklasisty język angielski 2019 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2019-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2019/jezyk-angielski-2019-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039225
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2019",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2019/",
+      "title": "Egzamin ósmoklasisty język angielski 2019 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2019-egzamin-osmoklasisty-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2019/jezyk-angielski-2019-egzamin-osmoklasisty-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039225
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2019",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2019/",
+      "title": "Egzamin ósmoklasisty język angielski 2019 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2019-egzamin-osmoklasisty.pdf",
+      "file": "pdf/jezyk-angielski/2019/jezyk-angielski-2019-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039225
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2020/",
+      "title": "Egzamin ósmoklasisty język angielski 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2020-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2020/jezyk-angielski-2020-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039227
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2020/",
+      "title": "Egzamin ósmoklasisty język angielski 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2020-egzamin-osmoklasisty-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2020/jezyk-angielski-2020-egzamin-osmoklasisty-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039227
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2020/",
+      "title": "Egzamin ósmoklasisty język angielski 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2020-egzamin-osmoklasisty.pdf",
+      "file": "pdf/jezyk-angielski/2020/jezyk-angielski-2020-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039227
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2021/",
+      "title": "Egzamin ósmoklasisty język angielski 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2021-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2021/jezyk-angielski-2021-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039229
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2021/",
+      "title": "Egzamin ósmoklasisty język angielski 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2021-egzamin-osmoklasisty-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2021/jezyk-angielski-2021-egzamin-osmoklasisty-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039229
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2021/",
+      "title": "Egzamin ósmoklasisty język angielski 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2021-egzamin-osmoklasisty.pdf",
+      "file": "pdf/jezyk-angielski/2021/jezyk-angielski-2021-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039229
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2022",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2022/",
+      "title": "Egzamin ósmoklasisty język angielski 2022 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2022-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2022/jezyk-angielski-2022-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039231
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2022",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2022/",
+      "title": "Egzamin ósmoklasisty język angielski 2022 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2022-egzamin-osmoklasisty-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2022/jezyk-angielski-2022-egzamin-osmoklasisty-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039231
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2022",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2022/",
+      "title": "Egzamin ósmoklasisty język angielski 2022 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2022-egzamin-osmoklasisty.pdf",
+      "file": "pdf/jezyk-angielski/2022/jezyk-angielski-2022-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039231
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2023",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2023/",
+      "title": "Egzamin ósmoklasisty język angielski 2023 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2023-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2023/jezyk-angielski-2023-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039232
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2023",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2023/",
+      "title": "Egzamin ósmoklasisty język angielski 2023 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2023-egzamin-osmoklasisty-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2023/jezyk-angielski-2023-egzamin-osmoklasisty-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039232
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2023",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2023/",
+      "title": "Egzamin ósmoklasisty język angielski 2023 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2023-egzamin-osmoklasisty.pdf",
+      "file": "pdf/jezyk-angielski/2023/jezyk-angielski-2023-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039232
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2024/",
+      "title": "Egzamin ósmoklasisty język angielski 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2024-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2024/jezyk-angielski-2024-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039234
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2024/",
+      "title": "Egzamin ósmoklasisty język angielski 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2024-egzamin-osmoklasisty-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2024/jezyk-angielski-2024-egzamin-osmoklasisty-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039234
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2024/",
+      "title": "Egzamin ósmoklasisty język angielski 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2024-egzamin-osmoklasisty.pdf",
+      "file": "pdf/jezyk-angielski/2024/jezyk-angielski-2024-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039234
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2025",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2025/",
+      "title": "Egzamin ósmoklasisty język angielski 2025 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2025-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2025/jezyk-angielski-2025-egzamin-osmoklasisty-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039237
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2025",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2025/",
+      "title": "Egzamin ósmoklasisty język angielski 2025 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2025-egzamin-osmoklasisty-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2025/jezyk-angielski-2025-egzamin-osmoklasisty-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039237
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2025",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-jezyk-angielski-2025/",
+      "title": "Egzamin ósmoklasisty język angielski 2025 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2025-egzamin-osmoklasisty.pdf",
+      "file": "pdf/jezyk-angielski/2025/jezyk-angielski-2025-egzamin-osmoklasisty.pdf",
+      "status": "skip_exists",
+      "ts": 1772039237
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2017",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2017/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2017 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2017-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2017/jezyk-angielski-2017-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039238
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2017",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2017/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2017 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2017-grudzien-egzamin-osmoklasisty-probny-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2017/jezyk-angielski-2017-grudzien-egzamin-osmoklasisty-probny-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039238
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2017",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2017/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2017 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2017-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/jezyk-angielski/2017/jezyk-angielski-2017-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039238
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2018",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2018/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2018 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2018-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2018/jezyk-angielski-2018-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039240
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2018",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2018/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2018 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2018-grudzien-egzamin-osmoklasisty-probny-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2018/jezyk-angielski-2018-grudzien-egzamin-osmoklasisty-probny-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039240
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2018",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2018/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2018 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2018-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/jezyk-angielski/2018/jezyk-angielski-2018-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039240
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2020/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2020-kwiecien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2020/jezyk-angielski-2020-kwiecien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039242
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2020/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2020-kwiecien-egzamin-osmoklasisty-probny-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2020/jezyk-angielski-2020-kwiecien-egzamin-osmoklasisty-probny-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039242
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2020/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2020-kwiecien-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/jezyk-angielski/2020/jezyk-angielski-2020-kwiecien-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039242
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2021/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2021-marzec-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2021/jezyk-angielski-2021-marzec-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039243
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2021/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2021-marzec-egzamin-osmoklasisty-probny-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2021/jezyk-angielski-2021-marzec-egzamin-osmoklasisty-probny-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039243
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2021/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2021-marzec-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/jezyk-angielski/2021/jezyk-angielski-2021-marzec-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039243
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2024/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2024-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2024/jezyk-angielski-2024-grudzien-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039245
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2024/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2024-grudzien-egzamin-osmoklasisty-probny-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2024/jezyk-angielski-2024-grudzien-egzamin-osmoklasisty-probny-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039245
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2024/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2024-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/jezyk-angielski/2024/jezyk-angielski-2024-grudzien-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039245
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2026",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2026/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2026 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2026-styczen-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2026/jezyk-angielski-2026-styczen-egzamin-osmoklasisty-probny-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039246
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2026",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2026/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2026 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2026-styczen-egzamin-osmoklasisty-probny-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2026/jezyk-angielski-2026-styczen-egzamin-osmoklasisty-probny-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039246
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2026",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-probny-jezyk-angielski-2026/",
+      "title": "Egzamin ósmoklasisty próbny język angielski 2026 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2026-styczen-egzamin-osmoklasisty-probny.pdf",
+      "file": "pdf/jezyk-angielski/2026/jezyk-angielski-2026-styczen-egzamin-osmoklasisty-probny.pdf",
+      "status": "skip_exists",
+      "ts": 1772039246
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2019",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2019/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2019 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2019-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2019/jezyk-angielski-2019-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039248
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2019",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2019/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2019 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2019-czerwiec-egzamin-osmoklasisty-dodatkowy-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2019/jezyk-angielski-2019-czerwiec-egzamin-osmoklasisty-dodatkowy-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039248
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2019",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2019/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2019 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2019-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/jezyk-angielski/2019/jezyk-angielski-2019-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039248
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2020/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2020-lipiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2020/jezyk-angielski-2020-lipiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039250
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2020/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2020-lipiec-egzamin-osmoklasisty-dodatkowy-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2020/jezyk-angielski-2020-lipiec-egzamin-osmoklasisty-dodatkowy-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039250
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2020",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2020/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2020 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2020-lipiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/jezyk-angielski/2020/jezyk-angielski-2020-lipiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039250
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2021/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2021-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2021/jezyk-angielski-2021-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039252
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2021/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2021-czerwiec-egzamin-osmoklasisty-dodatkowy-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2021/jezyk-angielski-2021-czerwiec-egzamin-osmoklasisty-dodatkowy-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039252
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2021",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2021/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2021 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2021-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/jezyk-angielski/2021/jezyk-angielski-2021-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039252
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2022",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2022/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2022 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2022-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2022/jezyk-angielski-2022-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039254
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2022",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2022/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2022 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2022-czerwiec-egzamin-osmoklasisty-dodatkowy-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2022/jezyk-angielski-2022-czerwiec-egzamin-osmoklasisty-dodatkowy-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039254
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2022",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2022/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2022 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2022-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/jezyk-angielski/2022/jezyk-angielski-2022-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039254
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2023",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2023/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2023 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2023-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2023/jezyk-angielski-2023-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039256
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2023",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2023/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2023 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2023-czerwiec-egzamin-osmoklasisty-dodatkowy-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2023/jezyk-angielski-2023-czerwiec-egzamin-osmoklasisty-dodatkowy-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039256
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2023",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2023/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2023 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2023-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/jezyk-angielski/2023/jezyk-angielski-2023-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039256
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2024/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2024-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2024/jezyk-angielski-2024-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039258
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2024/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2024-czerwiec-egzamin-osmoklasisty-dodatkowy-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2024/jezyk-angielski-2024-czerwiec-egzamin-osmoklasisty-dodatkowy-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039258
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2024",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2024/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2024 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2024-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/jezyk-angielski/2024/jezyk-angielski-2024-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039258
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2025",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2025/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2025 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2025-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "file": "pdf/jezyk-angielski/2025/jezyk-angielski-2025-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf",
+      "status": "skip_exists",
+      "ts": 1772039260
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2025",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2025/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2025 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2025-czerwiec-egzamin-osmoklasisty-dodatkowy-transkrypcja.pdf",
+      "file": "pdf/jezyk-angielski/2025/jezyk-angielski-2025-czerwiec-egzamin-osmoklasisty-dodatkowy-transkrypcja.pdf",
+      "status": "skip_exists",
+      "ts": 1772039260
+    },
+    {
+      "subject": "jezyk-angielski",
+      "year": "2025",
+      "exam_page": "https://arkusze.pl/egzamin-osmoklasisty-termin-dodatkowy-jezyk-angielski-2025/",
+      "title": "Egzamin ósmoklasisty termin dodatkowy język angielski 2025 - Arkusze CKE - matura, egzamin ósmoklasisty, egzamin zawodowy",
+      "pdf_url": "https://arkusze.pl/osmoklasisty/jezyk-angielski-2025-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "file": "pdf/jezyk-angielski/2025/jezyk-angielski-2025-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf",
+      "status": "skip_exists",
+      "ts": 1772039260
     }
   ]
 }
