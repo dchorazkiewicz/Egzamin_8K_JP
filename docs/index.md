@@ -1,3 +1,3 @@
-# Egzamin Ósmoklasisty – Język Polski
+# Egzamin Ósmoklasisty
 
 Strona testowa MkDocs dla repozytorium **Egzamin_8K**.

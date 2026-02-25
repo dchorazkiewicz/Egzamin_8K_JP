@@ -10,14 +10,14 @@ theme:
   language: pl
   palette:
     - scheme: default
-      primary: red
-      accent: red
+      primary: green
+      accent: green
       toggle:
         icon: material/brightness-7
         name: Tryb ciemny
     - scheme: slate
-      primary: red
-      accent: red
+      primary: green
+      accent: green
       toggle:
         icon: material/brightness-4
         name: Tryb jasny
