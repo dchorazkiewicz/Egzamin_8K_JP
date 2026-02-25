@@ -1,6 +1,8 @@
 import os
 import re
 import time
+import random
+import socket
 import requests
 from urllib.parse import urlparse, urlunparse, urljoin
 import xml.etree.ElementTree as ET
@@ -10,15 +12,27 @@ from bs4 import BeautifulSoup
 BASE = "https://arkusze.pl"
 BASE_DOMAIN = "arkusze.pl"
 
-OUTDIR = "pdf"
-SLEEP = 0.25
+ROOTDIR = os.path.dirname(os.path.abspath(__file__))
+OUTDIR = os.path.join(ROOTDIR, "pdf")
+SLEEP = 1.2
 OVERWRITE = False
+LOG_EACH_PAGE = True
+LOG_EACH_DOWNLOAD = True
+LOG_SITEMAPS = False
+LOG_ERRORS = True
 
 SUBJECTS = [
     "jezyk-polski",
     "jezyk-angielski",
     "matematyka",
 ]
+
+# Ręczne linki do PDF (jeśli chcesz pobrać coś niezależnie od sitemap/crawla).
+DIRECT_PDFS: dict[str, list[str]] = {
+    "jezyk-polski": [
+        "https://arkusze.pl/osmoklasisty/jezyk-polski-2026-styczen-egzamin-osmoklasisty-probny.pdf",
+    ],
+}
 
 # Jeżeli chcesz mocniej przyspieszyć, zmniejsz SLEEP, ale ryzykujesz blokadę.
 # ===== KONFIG END =====
@@ -27,8 +41,23 @@ YEAR_RE = re.compile(r"(19|20)\d{2}")
 
 session = requests.Session()
 session.headers.update({
-    "User-Agent": "Mozilla/5.0 (compatible; arkusze-downloader/2.0)"
+    # Używaj jawnego i uczciwego User-Agent; nie udawaj przeglądarki.
+    "User-Agent": "arkusze-downloader/2.1 (educational)"
 })
+
+def check_dns_or_die(hostname: str) -> None:
+    try:
+        socket.getaddrinfo(hostname, 443)
+    except OSError as e:
+        raise RuntimeError(
+            f"DNS: nie mogę rozwiązać nazwy {hostname!r} ({e}). "
+            "Sprawdź połączenie z internetem/DNS i spróbuj ponownie."
+        )
+
+def sleep_polite(base_seconds: float) -> None:
+    # Mały jitter ogranicza "burst" i jest bardziej przyjazny dla serwera.
+    jitter = base_seconds * 0.25
+    time.sleep(max(0.0, random.uniform(base_seconds - jitter, base_seconds + jitter)))
 
 def canonicalize(url: str) -> str:
     p = urlparse(url.strip())
@@ -41,9 +70,42 @@ def canonicalize(url: str) -> str:
 def ensure_dir(path: str) -> None:
     os.makedirs(path, exist_ok=True)
 
+def get_with_retries(url: str, *, timeout: int, max_tries: int = 4) -> requests.Response:
+    """
+    Pobierz URL w sposób "grzeczny":
+    - ograniczona liczba prób
+    - backoff dla 429/5xx
+    """
+    last_exc: Exception | None = None
+    for attempt in range(1, max_tries + 1):
+        try:
+            r = session.get(url, timeout=timeout)
+            if r.status_code in (429, 500, 502, 503, 504):
+                retry_after = r.headers.get("Retry-After")
+                if retry_after and retry_after.isdigit():
+                    wait = int(retry_after)
+                else:
+                    wait = min(30, 2 ** attempt)
+                if LOG_ERRORS:
+                    print("RETRY", r.status_code, url, "sleep", f"{wait}s")
+                time.sleep(wait)
+                continue
+            r.raise_for_status()
+            return r
+        except Exception as e:
+            last_exc = e
+            if attempt < max_tries:
+                wait = min(30, 2 ** attempt)
+                if LOG_ERRORS:
+                    print("RETRY EXC", url, "sleep", f"{wait}s", repr(e))
+                time.sleep(wait)
+            else:
+                break
+    assert last_exc is not None
+    raise last_exc
+
 def get_text(url: str) -> str:
-    r = session.get(url, timeout=30)
-    r.raise_for_status()
+    r = get_with_retries(url, timeout=30)
     return r.text
 
 def is_arkusze_host(url: str) -> bool:
@@ -105,6 +167,9 @@ def collect_sitemap_locs() -> set[str]:
         if sm_url in seen:
             continue
         seen.add(sm_url)
+
+        if LOG_SITEMAPS:
+            print("SITEMAP:", sm_url)
 
         locs = try_parse_sitemap(sm_url)
         if not locs:
@@ -177,8 +242,12 @@ def download_pdf(pdf_url: str, subject_slug: str) -> tuple[str, str]:
     if os.path.exists(path) and not OVERWRITE:
         return "SKIP", path
 
-    r = session.get(u, timeout=60)
-    r.raise_for_status()
+    r = get_with_retries(u, timeout=60)
+
+    content_type = (r.headers.get("Content-Type") or "").lower()
+    if "pdf" not in content_type and LOG_ERRORS:
+        # Czasem serwery zwracają HTML (np. 403/anty-bot) mimo linku .pdf.
+        print("WARN non-pdf Content-Type:", content_type or "missing", "for", u)
 
     existed = os.path.exists(path)
     with open(path, "wb") as f:
@@ -189,6 +258,48 @@ def download_pdf(pdf_url: str, subject_slug: str) -> tuple[str, str]:
     return "OK", path
 
 def main():
+    print("OUTDIR:", OUTDIR)
+    try:
+        check_dns_or_die(BASE_DOMAIN)
+    except Exception as e:
+        print("ERROR", e)
+        return
+
+    # Szybko pobierz ręcznie podane PDF-y (nie czekaj na sitemap/crawl).
+    for subject in SUBJECTS:
+        direct = []
+        for u in DIRECT_PDFS.get(subject, []):
+            u = canonicalize(u)
+            if is_osmoklasisty_pdf(u, subject):
+                direct.append(u)
+            elif LOG_ERRORS:
+                print("WARN direct URL nie pasuje do filtra PDF:", u)
+
+        direct = sorted(set(direct))
+        if not direct:
+            continue
+
+        print(f"\n{subject}: direct PDF-y:", len(direct))
+        for u in direct:
+            if LOG_EACH_DOWNLOAD:
+                dest = target_path(u, subject)
+                rel_dest = os.path.relpath(dest, OUTDIR)
+                if os.path.exists(dest) and not OVERWRITE:
+                    print("PLAN SKIP", u, "->", rel_dest)
+                else:
+                    print("PLAN GET ", u, "->", rel_dest)
+            try:
+                status, path = download_pdf(u, subject)
+                print(status, os.path.relpath(path, OUTDIR))
+            except requests.HTTPError as e:
+                if LOG_ERRORS:
+                    code = getattr(getattr(e, "response", None), "status_code", None)
+                    print("ERROR GET", u, "HTTP", code, e)
+            except Exception as e:
+                if LOG_ERRORS:
+                    print("ERROR GET", u, repr(e))
+            sleep_polite(SLEEP)
+
     locs = collect_sitemap_locs()
     print("Sitemap URL-e łącznie:", len(locs))
 
@@ -196,20 +307,31 @@ def main():
     for subject in SUBJECTS:
         pdfs = set(u for u in locs if is_osmoklasisty_pdf(u, subject))
 
+        # Dołóż ręcznie podane PDF-y
+        for u in DIRECT_PDFS.get(subject, []):
+            u = canonicalize(u)
+            if is_osmoklasisty_pdf(u, subject):
+                pdfs.add(u)
+            elif LOG_ERRORS:
+                print("WARN direct URL nie pasuje do filtra PDF:", u)
+
         # A jeśli nie ma PDF-ów w sitemap, to crawl stron z sitemap i wyciągnij z HTML
         candidate_pages = [u for u in locs if is_candidate_page(u, subject)]
         print(f"\n{subject}: strony do sprawdzenia:", len(candidate_pages))
 
         for i, page in enumerate(candidate_pages, 1):
+            if LOG_EACH_PAGE:
+                print(f"{subject}: CHECK {i}/{len(candidate_pages)} {page}")
             try:
                 pdfs |= extract_pdf_links_from_page(page, subject)
-            except Exception:
-                pass
+            except Exception as e:
+                if LOG_ERRORS:
+                    print(f"{subject}: ERROR page {page}: {e!r}")
 
             if i % 200 == 0:
                 print(f"{subject}: sprawdzono {i}/{len(candidate_pages)} stron, PDF-y: {len(pdfs)}")
 
-            time.sleep(SLEEP)
+            sleep_polite(SLEEP)
 
         pdfs = sorted(pdfs)
         print(f"{subject}: PDF-y znalezione:", len(pdfs))
@@ -223,9 +345,24 @@ def main():
 
         # download
         for u in pdfs:
-            status, path = download_pdf(u, subject)
-            print(status, os.path.relpath(path, OUTDIR))
-            time.sleep(SLEEP)
+            if LOG_EACH_DOWNLOAD:
+                dest = target_path(u, subject)
+                rel_dest = os.path.relpath(dest, OUTDIR)
+                if os.path.exists(dest) and not OVERWRITE:
+                    print("PLAN SKIP", u, "->", rel_dest)
+                else:
+                    print("PLAN GET ", u, "->", rel_dest)
+            try:
+                status, path = download_pdf(u, subject)
+                print(status, os.path.relpath(path, OUTDIR))
+            except requests.HTTPError as e:
+                if LOG_ERRORS:
+                    code = getattr(getattr(e, "response", None), "status_code", None)
+                    print("ERROR GET", u, "HTTP", code, e)
+            except Exception as e:
+                if LOG_ERRORS:
+                    print("ERROR GET", u, repr(e))
+            sleep_polite(SLEEP)
 
 if __name__ == "__main__":
     main()
