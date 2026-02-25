@@ -4,6 +4,9 @@ site_description: Repozytorium materiałów i opracowań egzaminacyjnych.
 nav:
   - Start: index.md
   - Arkusze PDF: pdfs.md
+  - Notatki (JP): notatki-jezyk-polski.md
+  - Notatki (MAT): notatki-matematyka.md
+  - Notatki (ANG): notatki-jezyk-angielski.md
 
 theme:
   name: material
