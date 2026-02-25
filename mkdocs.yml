@@ -1,0 +1,36 @@
+site_name: Egzamin Ósmoklasisty - Język Polski
+site_description: Repozytorium materiałów i opracowań egzaminacyjnych.
+
+theme:
+  name: material
+  language: pl
+  palette:
+    - scheme: default
+      primary: red
+      accent: red
+      toggle:
+        icon: material/brightness-7
+        name: Tryb ciemny
+    - scheme: slate
+      primary: red
+      accent: red
+      toggle:
+        icon: material/brightness-4
+        name: Tryb jasny
+  features:
+    - navigation.tabs
+    - navigation.top
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.magiclink
+  - footnotes
+
+plugins:
+  - search
+  - git-revision-date-localized:
+      type: date
