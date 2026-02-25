@@ -1,6 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+"""
+PDF → Markdown converter for Polish exam sheets.
+
+Primary backend: PyMuPDF (fitz) to preserve spans (bold/italic) and better layout.
+Fallback backend: pdftotext -layout (when fitz isn't available).
+
+Design goals:
+- Keep logical structure: tasks as "### Zadanie N. (0–1)".
+- Prefer readability for LLMs: remove visual noise, join hard line breaks into paragraphs,
+  keep options and tables in Markdown-friendly form.
+- Detect typical patterns: P/F tables and inline gaps with A/B/C/D in the middle of a sentence.
+"""
+
 from __future__ import annotations
 
 import argparse
@@ -8,17 +21,32 @@ import re
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Iterable, Literal, Optional
 
+
+Backend = Literal["fitz", "pdftotext"]
+
+
+# -----------------------------
+# Regexes and noise filtering
+# -----------------------------
 
 TASK_RE = re.compile(r"^\s*Zadanie\s+(\d+)\.\s*\(([^)]+)\)\s*$")
+
 PF_ONLY_RE = re.compile(r"^\s*P\s+F\s*$")
 PF_ANY_RE = re.compile(r"\bP\b\s+\bF\b")
 PF_TRAIL_RE = re.compile(r"^(.*?)(?:\s+P\s+F)\s*$")
-ANSWER_BLANK_RE = re.compile(r"^(?:\s*(?:[._…]|\.)(?:\s*(?:[._…]|\.))*)\s*$")
-ANSWER_UNDERSCORE_RE = re.compile(r"^(?:\s*_+\s*){3,}$")
+
+# Visual answer blanks / placeholders
+ANSWER_LINE_DOTS_RE = re.compile(r"^(?:\s*(?:[.\u2026]|\.)(?:\s*(?:[.\u2026]|\.))*)\s*$")
+ANSWER_LINE_UNDERSCORE_RE = re.compile(r"^(?:\s*_+\s*){3,}$")
+PLACEHOLDER_RUN_RE = re.compile(r"(?:[._\u2026·•‧∙⋅]{8,}|_{8,})")
+
+# Inline gaps and options
 OPTION_PAIR_SAME_LINE_RE = re.compile(r"^(?P<a>[A-D])\.\s+(?P<at>.+?)\s+(?P<b>[A-D])\.\s+(?P<bt>.+)$")
 INLINE_OPTIONS_RE = re.compile(r"\b(?:[A-D](?:\s+[A-D]){1,3})\b")
-PLACEHOLDER_RUN_RE = re.compile(r"(?:[._…·•‧∙⋅]{8,}|_{8,})")
+
+
 REMOVE_LINE_RES = [
     re.compile(r"Więcej arkuszy znajdziesz na stronie:", re.IGNORECASE),
     re.compile(r"^\s*arkusze\.pl\s*$", re.IGNORECASE),
@@ -33,6 +61,54 @@ REMOVE_LINE_RES = [
     re.compile(r"Zakres\s+środków", re.IGNORECASE),
 ]
 
+NOISE_FRAGMENT_RES = [
+    re.compile(r"\bPRZENIEŚ\b", re.IGNORECASE),
+    re.compile(r"\bRZENIEŚ\b", re.IGNORECASE),
+    re.compile(r"\bStrona\s+\d+\s+z\s+\d+\b", re.IGNORECASE),
+    re.compile(r"\b[A-Z]{3,}\s*-\s*\d{3}\s*-\s*\d{4}\b"),
+    re.compile(r"Więcej arkuszy znajdziesz na stronie:", re.IGNORECASE),
+    re.compile(r"\barkusze\.pl\b", re.IGNORECASE),
+]
+
+
+def is_noise_line(line: str) -> bool:
+    return any(rx.search(line) for rx in REMOVE_LINE_RES)
+
+
+def is_noise_fragment(text: str) -> bool:
+    """
+    Detect fragments that are almost certainly headers/footers even when embedded in a line.
+    Used mainly by the PyMuPDF backend.
+    """
+    t = text.strip()
+    if not t:
+        return False
+    return any(rx.search(t) for rx in NOISE_FRAGMENT_RES)
+
+
+INLINE_NOISE_STRIP_RES = [
+    re.compile(r"PRZENIEŚ.*?KART[ĘE]\s+ODPOWIEDZI\s*!?", re.IGNORECASE),
+    re.compile(r"\bNA\s+KART[ĘE]\s+ODPOWIEDZI\s*!?", re.IGNORECASE),
+    re.compile(r"\bP\s*\d+\.\s*(?:I\s*\d+\.\s*)?NA\s+KART[ĘE]\s+ODPOWIEDZI\s*!?", re.IGNORECASE),
+    re.compile(r"\bP\s*\d+\."),
+    re.compile(r"\b[A-Z]{3,}\s*-\s*\d{3}\s*-\s*\d{4}\b"),
+    re.compile(r"\bStrona\s+\d+\s+z\s+\d+\b", re.IGNORECASE),
+    re.compile(r"Więcej arkuszy znajdziesz na stronie:.*$", re.IGNORECASE),
+]
+
+
+def strip_inline_noise_plain(text: str) -> str:
+    out = text
+    for rx in INLINE_NOISE_STRIP_RES:
+        out = rx.sub("", out)
+    out = re.sub(r"\s{2,}", " ", out).strip()
+    return out
+
+
+# -----------------------------
+# Data model
+# -----------------------------
+
 
 @dataclass(frozen=True)
 class Task:
@@ -41,39 +117,13 @@ class Task:
     lines: list[str]
 
 
-def _run(*cmd: str) -> str:
-    return subprocess.check_output(list(cmd), text=True, errors="ignore")
-
-
-def extract_pages(pdf_path: Path) -> list[list[str]]:
-    txt = _run("pdftotext", "-layout", str(pdf_path), "-")
-    pages_raw = txt.split("\f")
-    pages: list[list[str]] = []
-    for p in pages_raw:
-        lines = [ln.rstrip("\n") for ln in p.splitlines()]
-        pages.append(lines)
-    return pages
-
-
-def is_noise_line(line: str) -> bool:
-    return any(rx.search(line) for rx in REMOVE_LINE_RES)
-
-
-def clean_lines(lines: list[str]) -> list[str]:
-    out: list[str] = []
-    for line in lines:
-        if not line.strip():
-            out.append("")
-            continue
-        if ANSWER_UNDERSCORE_RE.match(line) or (ANSWER_BLANK_RE.match(line) and len(line.strip()) >= 3):
-            continue
-        if is_noise_line(line):
-            continue
-        out.append(line.rstrip())
-    return out
+# -----------------------------
+# Text utilities
+# -----------------------------
 
 
 def dehyphenate(lines: list[str]) -> list[str]:
+    """Join hyphenated words split at line end."""
     out: list[str] = []
     i = 0
     while i < len(lines):
@@ -84,8 +134,7 @@ def dehyphenate(lines: list[str]) -> list[str]:
             and lines[i + 1]
             and lines[i + 1].lstrip()[:1].islower()
         ):
-            joined = line[:-1] + lines[i + 1].lstrip()
-            out.append(joined)
+            out.append(line[:-1] + lines[i + 1].lstrip())
             i += 2
             continue
         out.append(line)
@@ -94,18 +143,21 @@ def dehyphenate(lines: list[str]) -> list[str]:
 
 
 def normalize_whitespace(lines: list[str]) -> list[str]:
+    """
+    Normalize internal whitespace while preserving indentation for options.
+    Also replaces long placeholder runs inside a line with [ODP].
+    """
     out: list[str] = []
     for line in lines:
-        # zachowujemy wcięcia dla opcji (A., B., …), ale redukujemy wielokrotne spacje w środku
         prefix = re.match(r"^\s*", line).group(0)
         rest = line[len(prefix) :]
         rest = re.sub(r"\s{2,}", " ", rest).strip()
-        # usuń / skróć wizualne \"miejsca na odpowiedź\" w linii
         if PLACEHOLDER_RUN_RE.search(rest):
             rest = PLACEHOLDER_RUN_RE.sub("[ODP]", rest)
             rest = re.sub(r"\s+\[ODP\]\s+", " [ODP] ", rest).strip()
         out.append((prefix + rest).rstrip())
-    # kompresja nadmiaru pustych linii (max 2)
+
+    # compress blank lines (max 2)
     compact: list[str] = []
     blanks = 0
     for line in out:
@@ -119,15 +171,36 @@ def normalize_whitespace(lines: list[str]) -> list[str]:
     return compact
 
 
+def clean_lines(lines: list[str]) -> list[str]:
+    """Remove obvious headers/footers and full-line answer placeholders."""
+    out: list[str] = []
+    for line in lines:
+        if not line.strip():
+            out.append("")
+            continue
+        if ANSWER_LINE_UNDERSCORE_RE.match(line):
+            continue
+        if ANSWER_LINE_DOTS_RE.match(line) and len(line.strip()) >= 3:
+            continue
+        if is_noise_line(line):
+            continue
+        out.append(line.rstrip())
+    return out
+
+
 def _is_sentence_end(s: str) -> bool:
     return bool(re.search(r'[.!?…:]"?[\)\]]?$', s))
 
 
 def _is_keep_line_break(s: str) -> bool:
-    # Dialogi, listy, krótkie nagłówki itp.
+    """
+    Heuristics for lines which should NOT be joined into a paragraph.
+    """
     if not s:
         return True
     if s.startswith(("-", "*")):
+        return True
+    if s.startswith("–"):  # dialogues in reading texts
         return True
     if re.match(r"^[A-D]\.\s+", s):
         return True
@@ -140,18 +213,19 @@ def _is_keep_line_break(s: str) -> bool:
 
 def reflow_paragraphs(lines: list[str]) -> list[str]:
     """
-    Łączy twarde łamania wierszy w akapity (przybliżenie).
+    Join hard line breaks into paragraphs (best-effort).
     """
     out: list[str] = []
     paragraph: list[str] = []
 
     def flush() -> None:
         nonlocal paragraph
-        if paragraph:
-            joined = " ".join(paragraph).strip()
-            if joined and not is_noise_line(joined):
-                out.append(joined)
-            paragraph = []
+        if not paragraph:
+            return
+        joined = " ".join(paragraph).strip()
+        if joined and not is_noise_line(joined):
+            out.append(joined)
+        paragraph = []
 
     for raw in lines:
         s = raw.strip()
@@ -167,7 +241,16 @@ def reflow_paragraphs(lines: list[str]) -> list[str]:
             continue
 
         prev = paragraph[-1]
-        if _is_keep_line_break(prev) or _is_keep_line_break(s) or _is_sentence_end(prev):
+        keep_prev = _is_keep_line_break(prev)
+        keep_curr = _is_keep_line_break(s)
+        # Special-case: dialogue lines often wrap without repeating "–".
+        # If previous line starts with "–" and doesn't end a sentence, and the next line is a continuation,
+        # join them.
+        if keep_prev and prev.startswith("–") and not _is_sentence_end(prev) and not s.startswith("–"):
+            paragraph[-1] = f"{prev} {s}"
+            continue
+
+        if keep_prev or keep_curr or _is_sentence_end(prev):
             flush()
             paragraph.append(s)
             continue
@@ -175,7 +258,8 @@ def reflow_paragraphs(lines: list[str]) -> list[str]:
         paragraph[-1] = f"{prev} {s}"
 
     flush()
-    # kompresja pustych linii
+
+    # compress blank lines (max 2)
     compact: list[str] = []
     blanks = 0
     for line in out:
@@ -189,34 +273,46 @@ def reflow_paragraphs(lines: list[str]) -> list[str]:
     return compact
 
 
+# -----------------------------
+# Task parsing / formatting
+# -----------------------------
+
+
 def split_tasks(all_lines: list[str]) -> tuple[list[str], list[Task]]:
     preface: list[str] = []
     tasks: list[Task] = []
 
-    current_task: Task | None = None
-    current_lines: list[str] = []
+    current: Optional[Task] = None
+    buf: list[str] = []
 
-    def flush_task() -> None:
-        nonlocal current_task, current_lines
-        if current_task is None:
+    def flush() -> None:
+        nonlocal current, buf
+        if current is None:
             return
-        tasks.append(Task(number=current_task.number, points=current_task.points, lines=current_lines))
-        current_task = None
-        current_lines = []
+        tasks.append(Task(number=current.number, points=current.points, lines=buf))
+        current = None
+        buf = []
+
+    def plain_for_match(s: str) -> str:
+        # strip markdown we might emit in fitz backend
+        s = re.sub(r"</?u>", "", s)
+        s = s.replace("*", "")
+        s = re.sub(r"\s+", " ", s).strip()
+        return s
 
     for line in all_lines:
-        m = TASK_RE.match(line)
+        m = TASK_RE.match(plain_for_match(line))
         if m:
-            flush_task()
-            current_task = Task(number=int(m.group(1)), points=m.group(2), lines=[])
-            current_lines = []
+            flush()
+            current = Task(number=int(m.group(1)), points=m.group(2), lines=[])
+            buf = []
             continue
-        if current_task is None:
+        if current is None:
             preface.append(line)
         else:
-            current_lines.append(line)
+            buf.append(line)
 
-    flush_task()
+    flush()
     return preface, tasks
 
 
@@ -227,7 +323,6 @@ def format_blockquote(lines: list[str]) -> list[str]:
             out.append(">")
         else:
             out.append(f"> {line.strip()}")
-    # usuń trailing puste quote-linie
     while out and out[-1] == ">":
         out.pop()
     return out
@@ -235,21 +330,19 @@ def format_blockquote(lines: list[str]) -> list[str]:
 
 def extract_pf_table(task_lines: list[str]) -> tuple[list[str], list[str], list[str]] | None:
     """
-    Heurystyka dla tabel P/F po pdftotext -layout:
-    - stwierdzenie w 1–N liniach
-    - wiersze oddzielone pustą linią
-    - markery 'P F' mogą być osobno lub na końcu wiersza
+    Heurystyka tabel P/F:
+    - wykryj pierwsze 'P F'
+    - weź blok od ostatniej pustej linii przed nim jako start tabeli
+    - każdy wiersz kończący się na 'P F' (lub z osobną linią 'P F') to nowe stwierdzenie
     """
     first_pf_idx = None
     for i, line in enumerate(task_lines):
-        if PF_ANY_RE.search(line):
+        if PF_ANY_RE.search(line.replace("*", "")):
             first_pf_idx = i
             break
-
     if first_pf_idx is None:
         return None
 
-    # tabela zwykle zaczyna się po ostatniej pustej linii przed pierwszym 'P F'
     table_start = 0
     for j in range(first_pf_idx, -1, -1):
         if not task_lines[j].strip():
@@ -289,12 +382,11 @@ def extract_pf_table(task_lines: list[str]) -> tuple[list[str], list[str], list[
             in_table = False
             continue
 
-        if PF_ONLY_RE.match(line):
-            # same markery kolumn – pomijamy
+        if PF_ONLY_RE.match(line.replace("*", "")):
             continue
 
         m = PF_TRAIL_RE.match(line)
-        if m and PF_ANY_RE.search(line):
+        if m and PF_ANY_RE.search(line.replace("*", "")):
             content = m.group(1).strip()
             if content:
                 row_buf.append(content)
@@ -308,30 +400,20 @@ def extract_pf_table(task_lines: list[str]) -> tuple[list[str], list[str], list[
     if not statements:
         return None
 
-    table: list[str] = []
-    table.append("| Stwierdzenie | P | F |")
-    table.append("| :--- | :---: | :---: |")
+    table: list[str] = [
+        "| Stwierdzenie | P | F |",
+        "| :--- | :---: | :---: |",
+    ]
     for stmt in statements:
         table.append(f"| {stmt} | [ ] | [ ] |")
 
     return instruction, table, remaining
 
 
-def looks_like_reading_block(lines: list[str]) -> bool:
-    joined = " ".join(l.strip() for l in lines if l.strip())
-    if not joined:
-        return False
-    if "Przeczytaj" in joined or "Przeczytaj tekst" in joined:
-        return True
-    if re.search(r"\[\s*\d+\s*wyrazy\s*\]", joined):
-        return True
-    return False
-
-
 def fix_inline_options(lines: list[str]) -> tuple[list[str], list[list[str]]]:
     """
-    Naprawia przypadki typu: \"A B . ... C D ...\" → \"[LUKA]. ... [LUKA] ...\"
-    Zwraca (linie_po, lista_luk) gdzie każda luka to lista liter np. ['A','B'].
+    Detect inline option letters (A B / C D) in the middle of a sentence.
+    Replace them with [LUKA], return detected gaps like [['A','B'], ['C','D']].
     """
     blanks: list[list[str]] = []
     out: list[str] = []
@@ -342,14 +424,12 @@ def fix_inline_options(lines: list[str]) -> tuple[list[str], list[list[str]]]:
             out.append("")
             continue
 
-        # Rozbij linie z dwoma opcjami w jednej (np. "A. ... C. ...")
         m = OPTION_PAIR_SAME_LINE_RE.match(s)
         if m:
             out.append(f"{m.group('a')}. {m.group('at').strip()}")
             out.append(f"{m.group('b')}. {m.group('bt').strip()}")
             continue
 
-        # Zamień sekwencje liter opcji wplecione w tekst na [LUKA]
         def repl(match: re.Match) -> str:
             token = match.group(0)
             letters = [t for t in token.split() if t in {"A", "B", "C", "D"}]
@@ -358,7 +438,6 @@ def fix_inline_options(lines: list[str]) -> tuple[list[str], list[list[str]]]:
                 return "[LUKA]"
             return token
 
-        # unikaj ruszania normalnych opcji "A. ..."
         if re.match(r"^[A-D]\.\s+", s):
             out.append(s)
         else:
@@ -373,7 +452,7 @@ def fix_inline_options(lines: list[str]) -> tuple[list[str], list[list[str]]]:
 def extract_lektury_markdown(all_lines: list[str]) -> list[str] | None:
     start = None
     for i, line in enumerate(all_lines):
-        if "Lista lektur obowiązkowych" in line:
+        if "Lista lektur obowiązkowych" in line.replace("*", ""):
             start = i
             break
     if start is None:
@@ -381,7 +460,7 @@ def extract_lektury_markdown(all_lines: list[str]) -> list[str] | None:
 
     collected: list[str] = []
     for line in all_lines[start:]:
-        if "Przeczytaj tekst" in line:
+        if "Przeczytaj tekst" in line.replace("*", ""):
             break
         collected.append(line.strip())
 
@@ -394,6 +473,10 @@ def extract_lektury_markdown(all_lines: list[str]) -> list[str] | None:
             current_group = line
             items.append(f"### {current_group}")
             continue
+        if line.lower().startswith("inne lektury obowiązkowe"):
+            items.append("### Inne lektury obowiązkowe")
+            current_group = line
+            continue
         m = re.match(r"^\d+\)\s*(.+)$", line)
         if m:
             if current_group is None:
@@ -401,21 +484,16 @@ def extract_lektury_markdown(all_lines: list[str]) -> list[str] | None:
                 current_group = "Lista"
             items.append(f"1. {m.group(1).strip()}")
             continue
-        # krótkie nagłówki w obrębie listy (np. Inne lektury…)
-        if line.endswith(":") or line.lower().startswith("inne lektury obowiązkowe"):
-            items.append(f"### {line.rstrip(':').strip()}")
-            current_group = line
-            continue
 
     return items or None
 
 
 def format_markdown(
+    *,
     pdf_path: Path,
     title: str | None,
     preface: list[str],
     tasks: list[Task],
-    *,
     lektury_md: list[str] | None,
 ) -> str:
     out: list[str] = []
@@ -440,11 +518,10 @@ def format_markdown(
         out.append(f"### Zadanie {task.number}. ({task.points})")
         out.append("")
 
-        lines = [l for l in task.lines]
+        raw_lines = task.lines
 
-        # jeśli w środku pojawia się \"Przeczytaj tekst\" przed kolejnymi zadaniami, zostawiamy jako cytat
-        # (prosta wersja: osobne akapity w blockquote)
-        table = extract_pf_table(lines)
+        # P/F table
+        table = extract_pf_table(raw_lines)
         if table:
             instr_lines, table_md, remaining = table
             instr = [x.strip() for x in reflow_paragraphs(instr_lines) if x.strip()]
@@ -459,11 +536,11 @@ def format_markdown(
                 out.append("")
             continue
 
-        # domyślnie: wypisz treść jako tekst + listy
-        fixed, blanks = fix_inline_options(lines)
+        # Inline gaps + paragraph reflow
+        fixed, blanks = fix_inline_options(raw_lines)
         buf = reflow_paragraphs(fixed)
 
-        # lekka obróbka list A./B./C./D.
+        # Options formatting (A./B./C./D. as list)
         formatted: list[str] = []
         in_option_list = False
         for s in buf:
@@ -487,44 +564,182 @@ def format_markdown(
             out.append("")
             for i, letters in enumerate(blanks, start=1):
                 out.append(f"- Luka {i}: wybór `{', '.join(letters)}`")
+
         out.append("")
 
     return "\n".join(out).rstrip() + "\n"
 
 
-def main() -> int:
-    ap = argparse.ArgumentParser(description="Konwersja arkusza PDF do Markdown (struktura zadań).")
-    ap.add_argument("--in", dest="pdf_in", required=True, help="Wejściowy PDF")
-    ap.add_argument("--out", dest="md_out", required=True, help="Wyjściowy plik Markdown")
-    ap.add_argument("--title", default=None, help="Tytuł H1 (domyślnie: nazwa pliku)")
-    ap.add_argument(
-        "--start-at",
-        choices=["all", "przeczytaj", "zadanie"],
-        default="przeczytaj",
-        help="Od którego miejsca zacząć konwersję (domyślnie: pierwsze wystąpienie 'Przeczytaj').",
-    )
-    ap.add_argument(
-        "--include-lektury",
-        action="store_true",
-        help="Jeśli wykryje listę lektur w arkuszu, doda ją jako osobną sekcję Markdown.",
-    )
-    args = ap.parse_args()
+# -----------------------------
+# PDF extraction backends
+# -----------------------------
 
-    pdf_path = Path(args.pdf_in)
-    out_path = Path(args.md_out)
 
-    pages = extract_pages(pdf_path)
+def extract_pages_pdftotext(pdf_path: Path) -> list[list[str]]:
+    txt = subprocess.check_output(
+        ["pdftotext", "-layout", str(pdf_path), "-"],
+        text=True,
+        errors="ignore",
+    )
+    return [[ln.rstrip("\n") for ln in page.splitlines()] for page in txt.split("\f")]
+
+
+def _span_is_bold(font_name: str, flags: int, text: str) -> bool:
+    """
+    PyMuPDF gives flags and font name; flags are not stable across versions, so we
+    rely mostly on font name heuristics.
+    """
+    if re.fullmatch(r"\(?\s*\d+\s*[–-]\s*\d+\s*\)?", text.strip()):
+        return False
+    name = font_name.lower()
+    if "bold" in name:
+        return True
+    # fallback guess: some builds use bit 16 for bold
+    if flags & (1 << 4):
+        return True
+    return False
+
+
+def _span_is_italic(font_name: str, flags: int) -> bool:
+    name = font_name.lower()
+    if "italic" in name or "oblique" in name:
+        return True
+    # fallback guess: some builds use bit 2 for italic
+    if flags & (1 << 1):
+        return True
+    return False
+
+
+def _span_is_underline(font_name: str, flags: int) -> bool:
+    name = font_name.lower()
+    if "underline" in name:
+        return True
+    # fallback guess: underline bit
+    if flags & (1 << 2):
+        return True
+    return False
+
+
+def _join_parts(parts: list[str]) -> str:
+    """
+    Join span fragments into a single line with smarter spacing.
+    """
+    out: list[str] = []
+    for part in parts:
+        if not part:
+            continue
+        if not out:
+            out.append(part)
+            continue
+        prev = out[-1]
+        # join without space for e.g. "S" + "ZATAN" => "SZATAN"
+        if re.fullmatch(r"\*{0,3}[A-Z]\*{0,3}", prev) and re.match(r"^\*{0,3}[A-Z]", part):
+            out[-1] = prev + part
+            continue
+        if prev.endswith((" ", "\u00a0")) or part.startswith((",", ".", ":", ";", "!", "?", ")", "]")):
+            out[-1] = prev + part
+        else:
+            out[-1] = prev + " " + part
+    return "".join(out).strip()
+
+
+def extract_pages_fitz(pdf_path: Path) -> list[list[str]]:
+    """
+    Extract pages as list of lines using PyMuPDF spans.
+
+    NOTE: This requires `PyMuPDF` (module name `fitz`) installed in the active venv.
+    """
+    try:
+        import fitz  # type: ignore
+    except ModuleNotFoundError as e:  # pragma: no cover
+        raise SystemExit(
+            "Brak zależności `PyMuPDF` (fitz). Zainstaluj w venv: `./venv/bin/pip install PyMuPDF`."
+        ) from e
+
+    doc = fitz.open(str(pdf_path))
+    pages: list[list[str]] = []
+    for page in doc:
+        d = page.get_text("dict")
+        page_lines: list[str] = []
+        for block in d.get("blocks", []):
+            if block.get("type") != 0:
+                continue
+            for line in block.get("lines", []):
+                parts: list[str] = []
+                for span in line.get("spans", []):
+                    text = span.get("text", "")
+                    if not text or not text.strip():
+                        continue
+                    font = span.get("font", "") or ""
+                    flags = int(span.get("flags", 0) or 0)
+
+                    t = text.replace("\u00a0", " ")
+                    t = re.sub(r"\s{2,}", " ", t)
+
+                    if is_noise_fragment(t):
+                        continue
+
+                    bold = _span_is_bold(font, flags, t)
+                    italic = _span_is_italic(font, flags)
+                    underline = _span_is_underline(font, flags)
+
+                    if underline:
+                        t = f"<u>{t}</u>"
+                    if bold and italic:
+                        t = f"***{t}***"
+                    elif bold:
+                        t = f"**{t}**"
+                    elif italic:
+                        t = f"*{t}*"
+
+                    parts.append(t.strip())
+
+                joined = _join_parts(parts)
+                # normalize codes like "OPOP- 100 -2602" -> "OPOP-100-2602"
+                joined = re.sub(r"(?<=\w)\s*-\s*(?=\w)", "-", joined)
+                # if a footer/header leaked into a line, strip it on plain text (may drop styling)
+                joined_plain = re.sub(r"</?u>", "", joined).replace("*", "")
+                cleaned_plain = strip_inline_noise_plain(joined_plain)
+                if cleaned_plain != joined_plain:
+                    joined = cleaned_plain
+                if joined:
+                    page_lines.append(joined)
+            page_lines.append("")
+        pages.append(page_lines)
+    return pages
+
+
+# -----------------------------
+# Pipeline / CLI
+# -----------------------------
+
+
+def build_markdown(
+    *,
+    pdf_path: Path,
+    title: str | None,
+    backend: Backend,
+    start_at: Literal["all", "przeczytaj", "zadanie"],
+    include_lektury: bool,
+) -> str:
+    if backend == "fitz":
+        pages = extract_pages_fitz(pdf_path)
+    else:
+        pages = extract_pages_pdftotext(pdf_path)
+
     all_lines_full: list[str] = []
     for page in pages:
         cleaned = clean_lines(page)
         cleaned = dehyphenate(cleaned)
         cleaned = normalize_whitespace(cleaned)
         all_lines_full.extend(cleaned)
-        all_lines_full.append("")  # separator stron
+        all_lines_full.append("")
 
-    if args.start_at != "all":
+    # start-at trimming
+    all_lines = list(all_lines_full)
+    if start_at != "all":
         start_idx = None
-        if args.start_at == "przeczytaj":
+        if start_at == "przeczytaj":
             for i, line in enumerate(all_lines_full):
                 if "Przeczytaj" in line:
                     start_idx = i
@@ -536,14 +751,54 @@ def main() -> int:
                     break
         if start_idx is not None:
             all_lines = all_lines_full[start_idx:]
-        else:
-            all_lines = list(all_lines_full)
-    else:
-        all_lines = list(all_lines_full)
 
     preface, tasks = split_tasks(all_lines)
-    lektury_md = extract_lektury_markdown(all_lines_full) if args.include_lektury else None
-    md = format_markdown(pdf_path, args.title, preface, tasks, lektury_md=lektury_md)
+    lektury_md = extract_lektury_markdown(all_lines_full) if include_lektury else None
+
+    return format_markdown(
+        pdf_path=pdf_path,
+        title=title,
+        preface=preface,
+        tasks=tasks,
+        lektury_md=lektury_md,
+    )
+
+
+def main(argv: Optional[list[str]] = None) -> int:
+    ap = argparse.ArgumentParser(description="Konwersja arkusza PDF do Markdown (struktura zadań).")
+    ap.add_argument("--in", dest="pdf_in", required=True, help="Wejściowy PDF")
+    ap.add_argument("--out", dest="md_out", required=True, help="Wyjściowy plik Markdown")
+    ap.add_argument("--title", default=None, help="Tytuł H1 (domyślnie: nazwa pliku)")
+    ap.add_argument(
+        "--backend",
+        choices=["fitz", "pdftotext"],
+        default="fitz",
+        help="Backend ekstrakcji tekstu (domyślnie: fitz / PyMuPDF).",
+    )
+    ap.add_argument(
+        "--start-at",
+        choices=["all", "przeczytaj", "zadanie"],
+        default="przeczytaj",
+        help="Od którego miejsca zacząć konwersję (domyślnie: pierwsze wystąpienie 'Przeczytaj').",
+    )
+    ap.add_argument(
+        "--include-lektury",
+        action="store_true",
+        help="Jeśli wykryje listę lektur w arkuszu, doda ją jako osobną sekcję Markdown.",
+    )
+    args = ap.parse_args(argv)
+
+    pdf_path = Path(args.pdf_in)
+    out_path = Path(args.md_out)
+
+    md = build_markdown(
+        pdf_path=pdf_path,
+        title=args.title,
+        backend=args.backend,
+        start_at=args.start_at,
+        include_lektury=args.include_lektury,
+    )
+
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(md, encoding="utf-8")
     print(f"Wygenerowano: {out_path}")
