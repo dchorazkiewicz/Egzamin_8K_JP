@@ -14,12 +14,23 @@ TASK_RE = re.compile(r"^\s*Zadanie\s+(\d+)\.\s*\(([^)]+)\)\s*$")
 PF_ONLY_RE = re.compile(r"^\s*P\s+F\s*$")
 PF_ANY_RE = re.compile(r"\bP\b\s+\bF\b")
 PF_TRAIL_RE = re.compile(r"^(.*?)(?:\s+P\s+F)\s*$")
+ANSWER_BLANK_RE = re.compile(r"^(?:\s*(?:[._…]|\.)(?:\s*(?:[._…]|\.))*)\s*$")
+ANSWER_UNDERSCORE_RE = re.compile(r"^(?:\s*_+\s*){3,}$")
+OPTION_PAIR_SAME_LINE_RE = re.compile(r"^(?P<a>[A-D])\.\s+(?P<at>.+?)\s+(?P<b>[A-D])\.\s+(?P<bt>.+)$")
+INLINE_OPTIONS_RE = re.compile(r"\b(?:[A-D](?:\s+[A-D]){1,3})\b")
+PLACEHOLDER_RUN_RE = re.compile(r"(?:[._…·•‧∙⋅]{8,}|_{8,})")
 REMOVE_LINE_RES = [
     re.compile(r"Więcej arkuszy znajdziesz na stronie:", re.IGNORECASE),
     re.compile(r"^\s*arkusze\.pl\s*$", re.IGNORECASE),
     re.compile(r"\bStrona\s+\d+\s+z\s+\d+\b", re.IGNORECASE),
     re.compile(r"\b[A-Z]{3,}-\d{3}-\d{4}\b"),  # np. OPOP-100-2602
     re.compile(r"^\s*PRZENIEŚ\b.*$", re.IGNORECASE),
+    re.compile(r"Miejsce\s+dla", re.IGNORECASE),
+    re.compile(r"Tabela\s+przeznaczona\s+dla\s+egzaminatora", re.IGNORECASE),
+    re.compile(r"^\s*Brudnopis\b", re.IGNORECASE),
+    re.compile(r"^\s*JĘZYK\s+POLSKI\s*$", re.IGNORECASE),
+    re.compile(r"^\s*Egzamin\s+ósmoklasisty\s*$", re.IGNORECASE),
+    re.compile(r"Zakres\s+środków", re.IGNORECASE),
 ]
 
 
@@ -44,13 +55,19 @@ def extract_pages(pdf_path: Path) -> list[list[str]]:
     return pages
 
 
+def is_noise_line(line: str) -> bool:
+    return any(rx.search(line) for rx in REMOVE_LINE_RES)
+
+
 def clean_lines(lines: list[str]) -> list[str]:
     out: list[str] = []
     for line in lines:
         if not line.strip():
             out.append("")
             continue
-        if any(rx.search(line) for rx in REMOVE_LINE_RES):
+        if ANSWER_UNDERSCORE_RE.match(line) or (ANSWER_BLANK_RE.match(line) and len(line.strip()) >= 3):
+            continue
+        if is_noise_line(line):
             continue
         out.append(line.rstrip())
     return out
@@ -83,8 +100,82 @@ def normalize_whitespace(lines: list[str]) -> list[str]:
         prefix = re.match(r"^\s*", line).group(0)
         rest = line[len(prefix) :]
         rest = re.sub(r"\s{2,}", " ", rest).strip()
+        # usuń / skróć wizualne \"miejsca na odpowiedź\" w linii
+        if PLACEHOLDER_RUN_RE.search(rest):
+            rest = PLACEHOLDER_RUN_RE.sub("[ODP]", rest)
+            rest = re.sub(r"\s+\[ODP\]\s+", " [ODP] ", rest).strip()
         out.append((prefix + rest).rstrip())
     # kompresja nadmiaru pustych linii (max 2)
+    compact: list[str] = []
+    blanks = 0
+    for line in out:
+        if not line.strip():
+            blanks += 1
+            if blanks <= 2:
+                compact.append("")
+        else:
+            blanks = 0
+            compact.append(line)
+    return compact
+
+
+def _is_sentence_end(s: str) -> bool:
+    return bool(re.search(r'[.!?…:]"?[\)\]]?$', s))
+
+
+def _is_keep_line_break(s: str) -> bool:
+    # Dialogi, listy, krótkie nagłówki itp.
+    if not s:
+        return True
+    if s.startswith(("-", "*")):
+        return True
+    if re.match(r"^[A-D]\.\s+", s):
+        return True
+    if re.match(r"^\d+\.\s+", s):
+        return True
+    if s.isupper() and len(s) <= 60:
+        return True
+    return False
+
+
+def reflow_paragraphs(lines: list[str]) -> list[str]:
+    """
+    Łączy twarde łamania wierszy w akapity (przybliżenie).
+    """
+    out: list[str] = []
+    paragraph: list[str] = []
+
+    def flush() -> None:
+        nonlocal paragraph
+        if paragraph:
+            joined = " ".join(paragraph).strip()
+            if joined and not is_noise_line(joined):
+                out.append(joined)
+            paragraph = []
+
+    for raw in lines:
+        s = raw.strip()
+        if not s:
+            flush()
+            out.append("")
+            continue
+        if is_noise_line(s):
+            continue
+
+        if not paragraph:
+            paragraph.append(s)
+            continue
+
+        prev = paragraph[-1]
+        if _is_keep_line_break(prev) or _is_keep_line_break(s) or _is_sentence_end(prev):
+            flush()
+            paragraph.append(s)
+            continue
+
+        paragraph[-1] = f"{prev} {s}"
+
+    flush()
+    # kompresja pustych linii
     compact: list[str] = []
     blanks = 0
     for line in out:
@@ -131,7 +222,7 @@ def split_tasks(all_lines: list[str]) -> tuple[list[str], list[Task]]:
 
 def format_blockquote(lines: list[str]) -> list[str]:
     out: list[str] = []
-    for line in lines:
+    for line in reflow_paragraphs(lines):
         if not line.strip():
             out.append(">")
         else:
@@ -237,6 +328,48 @@ def looks_like_reading_block(lines: list[str]) -> bool:
     return False
 
 
+def fix_inline_options(lines: list[str]) -> tuple[list[str], list[list[str]]]:
+    """
+    Naprawia przypadki typu: \"A B . ... C D ...\" → \"[LUKA]. ... [LUKA] ...\"
+    Zwraca (linie_po, lista_luk) gdzie każda luka to lista liter np. ['A','B'].
+    """
+    blanks: list[list[str]] = []
+    out: list[str] = []
+
+    for line in lines:
+        s = line.strip()
+        if not s:
+            out.append("")
+            continue
+
+        # Rozbij linie z dwoma opcjami w jednej (np. "A. ... C. ...")
+        m = OPTION_PAIR_SAME_LINE_RE.match(s)
+        if m:
+            out.append(f"{m.group('a')}. {m.group('at').strip()}")
+            out.append(f"{m.group('b')}. {m.group('bt').strip()}")
+            continue
+
+        # Zamień sekwencje liter opcji wplecione w tekst na [LUKA]
+        def repl(match: re.Match) -> str:
+            token = match.group(0)
+            letters = [t for t in token.split() if t in {"A", "B", "C", "D"}]
+            if len(letters) >= 2:
+                blanks.append(letters)
+                return "[LUKA]"
+            return token
+
+        # unikaj ruszania normalnych opcji "A. ..."
+        if re.match(r"^[A-D]\.\s+", s):
+            out.append(s)
+        else:
+            replaced = INLINE_OPTIONS_RE.sub(repl, s)
+            replaced = re.sub(r"\[LUKA\]\s+\.", "[LUKA].", replaced)
+            replaced = re.sub(r"\s{2,}", " ", replaced).strip()
+            out.append(replaced)
+
+    return out, blanks
+
+
 def extract_lektury_markdown(all_lines: list[str]) -> list[str] | None:
     start = None
     for i, line in enumerate(all_lines):
@@ -304,7 +437,7 @@ def format_markdown(
         out.append("")
 
     for task in tasks:
-        out.append(f"### Zadanie {task.number}. (${task.points}$)")
+        out.append(f"### Zadanie {task.number}. ({task.points})")
         out.append("")
 
         lines = [l for l in task.lines]
@@ -314,7 +447,7 @@ def format_markdown(
         table = extract_pf_table(lines)
         if table:
             instr_lines, table_md, remaining = table
-            instr = [x.strip() for x in instr_lines if x.strip()]
+            instr = [x.strip() for x in reflow_paragraphs(instr_lines) if x.strip()]
             if instr:
                 out.append(re.sub(r"\s+", " ", " ".join(instr)).strip())
                 out.append("")
@@ -327,26 +460,33 @@ def format_markdown(
             continue
 
         # domyślnie: wypisz treść jako tekst + listy
-        buf: list[str] = []
-        for line in lines:
-            s = line.strip()
-            if not s:
-                if buf and buf[-1] != "":
-                    buf.append("")
-                continue
-            buf.append(s)
+        fixed, blanks = fix_inline_options(lines)
+        buf = reflow_paragraphs(fixed)
 
         # lekka obróbka list A./B./C./D.
         formatted: list[str] = []
+        in_option_list = False
         for s in buf:
+            if in_option_list and not s.strip():
+                continue
             if re.match(r"^[A-D]\.\s+", s):
-                if formatted and formatted[-1] != "":
-                    formatted.append("")
+                if not in_option_list:
+                    if formatted and formatted[-1] != "":
+                        formatted.append("")
+                    in_option_list = True
                 formatted.append(f"- {s}")
             else:
+                in_option_list = False
                 formatted.append(s)
 
         out.extend(formatted)
+
+        if blanks:
+            out.append("")
+            out.append("**Luki w treści:**")
+            out.append("")
+            for i, letters in enumerate(blanks, start=1):
+                out.append(f"- Luka {i}: wybór `{', '.join(letters)}`")
         out.append("")
 
     return "\n".join(out).rstrip() + "\n"
