@@ -1,368 +1,348 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import argparse
+import json
 import os
+import random
 import re
 import time
-import random
-import socket
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Dict, List, Optional, Set, Tuple
+from urllib.parse import urljoin, urlparse
+
 import requests
-from urllib.parse import urlparse, urlunparse, urljoin
-import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 
-# ===== KONFIG =====
-BASE = "https://arkusze.pl"
-BASE_DOMAIN = "arkusze.pl"
+PDF_RE = re.compile(r"\.pdf($|\?)", re.IGNORECASE)
+YEAR_RE = re.compile(r"(20\d{2})")  # 2000-2099
 
-ROOTDIR = os.path.dirname(os.path.abspath(__file__))
-OUTDIR = os.path.join(ROOTDIR, "pdf")
-SLEEP = 1.2
-OVERWRITE = False
-LOG_EACH_PAGE = True
-LOG_EACH_DOWNLOAD = True
-LOG_SITEMAPS = False
-LOG_ERRORS = True
-
-SUBJECTS = [
-    "jezyk-polski",
-    "jezyk-angielski",
-    "matematyka",
-]
-
-# Ręczne linki do PDF (jeśli chcesz pobrać coś niezależnie od sitemap/crawla).
-DIRECT_PDFS: dict[str, list[str]] = {
-    "jezyk-polski": [
-        "https://arkusze.pl/osmoklasisty/jezyk-polski-2026-styczen-egzamin-osmoklasisty-probny.pdf",
-    ],
+DEFAULT_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (compatible; EgzaminScraper/1.0; +https://example.invalid)"
 }
 
-# Jeżeli chcesz mocniej przyspieszyć, zmniejsz SLEEP, ale ryzykujesz blokadę.
-# ===== KONFIG END =====
 
-YEAR_RE = re.compile(r"(19|20)\d{2}")
+@dataclass(frozen=True)
+class SubjectConfig:
+    key: str
+    list_url: str
 
-session = requests.Session()
-session.headers.update({
-    # Używaj jawnego i uczciwego User-Agent; nie udawaj przeglądarki.
-    "User-Agent": "arkusze-downloader/2.1 (educational)"
-})
 
-def check_dns_or_die(hostname: str) -> None:
-    try:
-        socket.getaddrinfo(hostname, 443)
-    except OSError as e:
-        raise RuntimeError(
-            f"DNS: nie mogę rozwiązać nazwy {hostname!r} ({e}). "
-            "Sprawdź połączenie z internetem/DNS i spróbuj ponownie."
-        )
+SUBJECTS: Dict[str, SubjectConfig] = {
+    # Możesz dopisać kolejne listy jeśli masz inne kategorie
+    "jezyk-polski": SubjectConfig(
+        key="jezyk-polski",
+        list_url="https://arkusze.pl/jezyk-polski-egzamin-osmoklasisty/",
+    ),
+    "matematyka": SubjectConfig(
+        key="matematyka",
+        list_url="https://arkusze.pl/matematyka-egzamin-osmoklasisty/",
+    ),
+    "jezyk-angielski": SubjectConfig(
+        key="jezyk-angielski",
+        list_url="https://arkusze.pl/jezyk-angielski-egzamin-osmoklasisty/",
+    ),
+}
 
-def sleep_polite(base_seconds: float) -> None:
-    # Mały jitter ogranicza "burst" i jest bardziej przyjazny dla serwera.
-    jitter = base_seconds * 0.25
-    time.sleep(max(0.0, random.uniform(base_seconds - jitter, base_seconds + jitter)))
 
-def canonicalize(url: str) -> str:
-    p = urlparse(url.strip())
-    netloc = p.netloc.lower()
-    if netloc.startswith("www."):
-        netloc = netloc[4:]
-    # Ujednolicamy scheme na https, czyścimy fragment
-    return urlunparse(("https", netloc, p.path, p.params, p.query, ""))
+def polite_sleep(base_delay: float, jitter: float) -> None:
+    """Śpij między requestami, żeby nie młócić serwera."""
+    if base_delay <= 0:
+        return
+    extra = random.uniform(0, jitter) if jitter > 0 else 0
+    time.sleep(base_delay + extra)
 
-def ensure_dir(path: str) -> None:
-    os.makedirs(path, exist_ok=True)
 
-def get_with_retries(url: str, *, timeout: int, max_tries: int = 4) -> requests.Response:
-    """
-    Pobierz URL w sposób "grzeczny":
-    - ograniczona liczba prób
-    - backoff dla 429/5xx
-    """
-    last_exc: Exception | None = None
-    for attempt in range(1, max_tries + 1):
+def safe_filename(name: str) -> str:
+    name = name.strip()
+    # usuń dziwne znaki
+    name = re.sub(r"[^\w\-.() ]+", "_", name, flags=re.UNICODE)
+    name = re.sub(r"\s+", " ", name).strip()
+    return name or "plik"
+
+
+def extract_year(*texts: str) -> str:
+    """Spróbuj znaleźć rocznik (YYYY) w URL/tytule/nazwie pliku."""
+    for t in texts:
+        if not t:
+            continue
+        m = YEAR_RE.search(t)
+        if m:
+            return m.group(1)
+    return "unknown"
+
+
+def request_get(session: requests.Session, url: str, timeout: int, retries: int,
+                delay: float, jitter: float) -> requests.Response:
+    last_exc = None
+    for attempt in range(1, retries + 1):
         try:
-            r = session.get(url, timeout=timeout)
-            if r.status_code in (429, 500, 502, 503, 504):
-                retry_after = r.headers.get("Retry-After")
-                if retry_after and retry_after.isdigit():
-                    wait = int(retry_after)
-                else:
-                    wait = min(30, 2 ** attempt)
-                if LOG_ERRORS:
-                    print("RETRY", r.status_code, url, "sleep", f"{wait}s")
-                time.sleep(wait)
-                continue
+            polite_sleep(delay, jitter)
+            r = session.get(url, timeout=timeout, allow_redirects=True)
             r.raise_for_status()
             return r
         except Exception as e:
             last_exc = e
-            if attempt < max_tries:
-                wait = min(30, 2 ** attempt)
-                if LOG_ERRORS:
-                    print("RETRY EXC", url, "sleep", f"{wait}s", repr(e))
-                time.sleep(wait)
+            if attempt < retries:
+                # krótki backoff
+                time.sleep(min(2.0 * attempt, 6.0))
             else:
-                break
-    assert last_exc is not None
-    raise last_exc
+                raise last_exc
 
-def get_text(url: str) -> str:
-    r = get_with_retries(url, timeout=30)
+
+def page_html(session: requests.Session, url: str, timeout: int, retries: int,
+              delay: float, jitter: float) -> str:
+    r = request_get(session, url, timeout, retries, delay, jitter)
+    # arkusze.pl to zwykle utf-8; requests sam wykryje, ale zostawiamy fallback
+    r.encoding = r.encoding or "utf-8"
     return r.text
 
-def is_arkusze_host(url: str) -> bool:
-    p = urlparse(canonicalize(url))
-    return p.netloc.endswith(BASE_DOMAIN)
 
-def extract_year(s: str) -> str:
-    m = YEAR_RE.search(s)
-    return m.group(0) if m else "unknown"
-
-def try_parse_sitemap(url: str) -> set[str]:
-    try:
-        xml_text = get_text(url)
-    except Exception:
-        return set()
-
-    try:
-        root = ET.fromstring(xml_text)
-    except Exception:
-        return set()
-
-    locs = set()
-    for elem in root.iter():
-        if elem.tag.endswith("loc") and elem.text:
-            locs.add(canonicalize(elem.text.strip()))
-    return locs
-
-def collect_all_sitemap_urls() -> set[str]:
-    candidates = [
-        BASE + "/robots.txt",
-        BASE + "/sitemap_index.xml",
-        BASE + "/sitemap.xml",
-        BASE + "/wp-sitemap.xml",
-    ]
-
-    sitemap_urls = set()
-
-    # robots.txt -> linie Sitemap:
-    try:
-        robots = get_text(candidates[0])
-        for line in robots.splitlines():
-            if line.lower().startswith("sitemap:"):
-                sitemap_urls.add(line.split(":", 1)[1].strip())
-    except Exception:
-        pass
-
-    sitemap_urls.update(candidates[1:])
-    return {canonicalize(u) for u in sitemap_urls}
-
-def collect_sitemap_locs() -> set[str]:
-    sitemap_urls = collect_all_sitemap_urls()
-
-    all_locs = set()
-    queue = list(sitemap_urls)
-    seen = set()
-
-    while queue:
-        sm_url = canonicalize(queue.pop())
-        if sm_url in seen:
-            continue
-        seen.add(sm_url)
-
-        if LOG_SITEMAPS:
-            print("SITEMAP:", sm_url)
-
-        locs = try_parse_sitemap(sm_url)
-        if not locs:
-            continue
-
-        for loc in locs:
-            if loc.lower().endswith(".xml") and "sitemap" in loc.lower():
-                queue.append(loc)
-            else:
-                all_locs.add(loc)
-
-        time.sleep(SLEEP)
-
-    return all_locs
-
-def is_osmoklasisty_pdf(url: str, subject_slug: str) -> bool:
-    u = canonicalize(url)
-    p = urlparse(u)
-    if not p.netloc.endswith(BASE_DOMAIN):
-        return False
-    path = p.path.lower()
-    return (
-        path.startswith("/osmoklasisty/")
-        and path.endswith(".pdf")
-        and subject_slug.lower() in path
-    )
-
-def is_candidate_page(url: str, subject_slug: str) -> bool:
-    """
-    Strona HTML, która potencjalnie linkuje PDF-y.
-    Bierzemy takie, które zawierają subject w URL lub mają w URL 'osmoklasisty'.
-    """
-    u = canonicalize(url)
-    p = urlparse(u)
-
-    if not p.netloc.endswith(BASE_DOMAIN):
-        return False
-
-    path = p.path.lower()
-    if path.endswith(".pdf"):
-        return False
-
-    return (subject_slug.lower() in path) or ("osmoklasisty" in path)
-
-def extract_pdf_links_from_page(page_url: str, subject_slug: str) -> set[str]:
-    html = get_text(page_url)
+def exam_pages_from_list_page(html: str, base_url: str) -> Tuple[Set[str], Optional[str]]:
+    """Z jednej strony listy wyciąga linki do wpisów + link do następnej strony."""
     soup = BeautifulSoup(html, "html.parser")
 
-    found = set()
-    for a in soup.select("a[href]"):
+    pages: Set[str] = set()
+
+    # WordPress: nagłówki wpisów
+    for a in soup.select("h2.entry-title a[href]"):
         href = a.get("href", "").strip()
+        if href:
+            pages.add(urljoin(base_url, href))
+
+    # fallback: czasem h3 / inny układ
+    if not pages:
+        for a in soup.select("article a[href]"):
+            href = a.get("href", "").strip()
+            if href and "arkusze.pl/" in href and "egzamin" in href:
+                pages.add(urljoin(base_url, href))
+
+    # paginacja: "next"
+    next_url = None
+    next_a = soup.select_one("a.next[href]")
+    if next_a:
+        next_url = urljoin(base_url, next_a.get("href"))
+
+    # czasem jest w nawigacji "Next page"
+    if not next_url:
+        for a in soup.select("a[href]"):
+            txt = (a.get_text() or "").strip().lower()
+            if txt in {"następna", "nastepna", "next"}:
+                href = a.get("href", "").strip()
+                if href and "/page/" in href:
+                    next_url = urljoin(base_url, href)
+                    break
+
+    return pages, next_url
+
+
+def crawl_list_all(session: requests.Session, start_url: str, timeout: int, retries: int,
+                   delay: float, jitter: float, max_pages: int = 10_000) -> List[str]:
+    """Przechodzi po /page/2/ /page/3/ itd. i zbiera wszystkie wpisy."""
+    url = start_url
+    all_pages: Set[str] = set()
+    seen_list_pages: Set[str] = set()
+    n = 0
+
+    while url and url not in seen_list_pages and n < max_pages:
+        seen_list_pages.add(url)
+        n += 1
+
+        html = page_html(session, url, timeout, retries, delay, jitter)
+        pages, next_url = exam_pages_from_list_page(html, base_url=url)
+
+        all_pages.update(pages)
+        url = next_url
+
+    return sorted(all_pages)
+
+
+def pdf_links_from_exam_page(html: str, base_url: str) -> List[str]:
+    soup = BeautifulSoup(html, "html.parser")
+    links: Set[str] = set()
+
+    for a in soup.select("a[href]"):
+        href = (a.get("href") or "").strip()
         if not href:
             continue
-        abs_url = canonicalize(urljoin(page_url, href))
-        if is_osmoklasisty_pdf(abs_url, subject_slug):
-            found.add(abs_url)
-    return found
+        full = urljoin(base_url, href)
+        if PDF_RE.search(full):
+            links.add(full)
 
-def target_path(pdf_url: str, subject_slug: str) -> str:
-    u = canonicalize(pdf_url)
-    filename = u.split("/")[-1]
-    year = extract_year(u)
-    return os.path.join(OUTDIR, subject_slug, year, filename)
+    return sorted(links)
 
-def download_pdf(pdf_url: str, subject_slug: str) -> tuple[str, str]:
-    u = canonicalize(pdf_url)
-    path = target_path(u, subject_slug)
-    ensure_dir(os.path.dirname(path))
 
-    if os.path.exists(path) and not OVERWRITE:
-        return "SKIP", path
+def get_page_title(html: str) -> str:
+    soup = BeautifulSoup(html, "html.parser")
+    title = soup.title.get_text(strip=True) if soup.title else ""
+    return title or ""
 
-    r = get_with_retries(u, timeout=60)
 
-    content_type = (r.headers.get("Content-Type") or "").lower()
-    if "pdf" not in content_type and LOG_ERRORS:
-        # Czasem serwery zwracają HTML (np. 403/anty-bot) mimo linku .pdf.
-        print("WARN non-pdf Content-Type:", content_type or "missing", "for", u)
+def download_pdf(session: requests.Session, pdf_url: str, out_path: Path, timeout: int,
+                 retries: int, delay: float, jitter: float, min_bytes_ok: int = 1024) -> str:
+    """
+    Zapisuje PDF na dysk.
+    Jeśli plik istnieje i wygląda OK, pomija.
+    """
+    out_path.parent.mkdir(parents=True, exist_ok=True)
 
-    existed = os.path.exists(path)
-    with open(path, "wb") as f:
-        f.write(r.content)
+    if out_path.exists():
+        try:
+            size = out_path.stat().st_size
+            if size >= min_bytes_ok:
+                return "skip_exists"
+        except OSError:
+            pass
 
-    if existed and OVERWRITE:
-        return "OVERWRITE", path
-    return "OK", path
+    # download stream
+    last_exc = None
+    for attempt in range(1, retries + 1):
+        try:
+            polite_sleep(delay, jitter)
+            with session.get(pdf_url, stream=True, timeout=timeout, allow_redirects=True) as r:
+                r.raise_for_status()
+
+                tmp_path = out_path.with_suffix(out_path.suffix + ".part")
+                with open(tmp_path, "wb") as f:
+                    for chunk in r.iter_content(chunk_size=1024 * 256):
+                        if chunk:
+                            f.write(chunk)
+
+                # sanity check
+                if tmp_path.stat().st_size < min_bytes_ok:
+                    tmp_path.unlink(missing_ok=True)
+                    raise RuntimeError(f"Pobrany plik za mały: {tmp_path}")
+
+                tmp_path.replace(out_path)
+                return "downloaded"
+        except Exception as e:
+            last_exc = e
+            if attempt < retries:
+                time.sleep(min(2.0 * attempt, 6.0))
+            else:
+                raise last_exc
+    raise last_exc  # pragma: no cover
+
+
+def build_output_path(root: Path, subject: str, year: str, pdf_url: str) -> Path:
+    filename = os.path.basename(urlparse(pdf_url).path) or "plik.pdf"
+    filename = safe_filename(filename)
+    return root / subject / year / filename
+
+
+def load_manifest(path: Path) -> dict:
+    if path.exists():
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            return {}
+    return {}
+
+
+def save_manifest(path: Path, data: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
 
 def main():
-    print("OUTDIR:", OUTDIR)
-    try:
-        check_dns_or_die(BASE_DOMAIN)
-    except Exception as e:
-        print("ERROR", e)
-        return
+    ap = argparse.ArgumentParser(description="Scraper PDF-ów z arkusze.pl (ósmoklasista)")
+    ap.add_argument("--out", default="pdf", help="Katalog wyjściowy (domyślnie: pdf)")
+    ap.add_argument("--subjects", default="jezyk-polski,matematyka,jezyk-angielski",
+                    help=f"Lista przedmiotów oddzielona przecinkami. Dostępne: {','.join(SUBJECTS.keys())}")
+    ap.add_argument("--delay", type=float, default=1.2, help="Opóźnienie między requestami (sekundy)")
+    ap.add_argument("--jitter", type=float, default=0.8, help="Losowy dodatek do delay (sekundy)")
+    ap.add_argument("--timeout", type=int, default=30, help="Timeout requestów (sekundy)")
+    ap.add_argument("--retries", type=int, default=3, help="Ile retry na request")
+    ap.add_argument("--max-exams", type=int, default=10_000, help="Limit liczby stron egzaminów na przedmiot")
+    args = ap.parse_args()
 
-    # Szybko pobierz ręcznie podane PDF-y (nie czekaj na sitemap/crawl).
-    for subject in SUBJECTS:
-        direct = []
-        for u in DIRECT_PDFS.get(subject, []):
-            u = canonicalize(u)
-            if is_osmoklasisty_pdf(u, subject):
-                direct.append(u)
-            elif LOG_ERRORS:
-                print("WARN direct URL nie pasuje do filtra PDF:", u)
+    out_root = Path(args.out)
+    manifest_path = out_root / "manifest.json"
+    manifest = load_manifest(manifest_path)
+    manifest.setdefault("downloads", [])
 
-        direct = sorted(set(direct))
-        if not direct:
-            continue
+    wanted = [s.strip() for s in args.subjects.split(",") if s.strip()]
+    for s in wanted:
+        if s not in SUBJECTS:
+            raise SystemExit(f"Nieznany przedmiot: {s}. Dostępne: {', '.join(SUBJECTS.keys())}")
 
-        print(f"\n{subject}: direct PDF-y:", len(direct))
-        for u in direct:
-            if LOG_EACH_DOWNLOAD:
-                dest = target_path(u, subject)
-                rel_dest = os.path.relpath(dest, OUTDIR)
-                if os.path.exists(dest) and not OVERWRITE:
-                    print("PLAN SKIP", u, "->", rel_dest)
-                else:
-                    print("PLAN GET ", u, "->", rel_dest)
+    session = requests.Session()
+    session.headers.update(DEFAULT_HEADERS)
+
+    total_new = 0
+    total_skipped = 0
+
+    for subject in wanted:
+        cfg = SUBJECTS[subject]
+        print(f"\n== {subject} ==")
+        exam_pages = crawl_list_all(
+            session=session,
+            start_url=cfg.list_url,
+            timeout=args.timeout,
+            retries=args.retries,
+            delay=args.delay,
+            jitter=args.jitter,
+            max_pages=10_000,
+        )
+        if args.max_exams and len(exam_pages) > args.max_exams:
+            exam_pages = exam_pages[: args.max_exams]
+
+        print(f"Wpisów egzaminów znaleziono: {len(exam_pages)}")
+
+        for idx, exam_url in enumerate(exam_pages, start=1):
             try:
-                status, path = download_pdf(u, subject)
-                print(status, os.path.relpath(path, OUTDIR))
-            except requests.HTTPError as e:
-                if LOG_ERRORS:
-                    code = getattr(getattr(e, "response", None), "status_code", None)
-                    print("ERROR GET", u, "HTTP", code, e)
+                html = page_html(session, exam_url, args.timeout, args.retries, args.delay, args.jitter)
+                title = get_page_title(html)
+                pdfs = pdf_links_from_exam_page(html, exam_url)
+
+                if not pdfs:
+                    # czasem wpis bez pdf
+                    continue
+
+                for pdf_url in pdfs:
+                    year = extract_year(pdf_url, exam_url, title)
+                    out_path = build_output_path(out_root, subject, year, pdf_url)
+
+                    status = download_pdf(
+                        session=session,
+                        pdf_url=pdf_url,
+                        out_path=out_path,
+                        timeout=args.timeout,
+                        retries=args.retries,
+                        delay=args.delay,
+                        jitter=args.jitter,
+                    )
+
+                    if status == "downloaded":
+                        total_new += 1
+                        print(f"[{subject}] + {out_path}")
+                    else:
+                        total_skipped += 1
+
+                    manifest["downloads"].append({
+                        "subject": subject,
+                        "year": year,
+                        "exam_page": exam_url,
+                        "title": title,
+                        "pdf_url": pdf_url,
+                        "file": str(out_path),
+                        "status": status,
+                        "ts": int(time.time()),
+                    })
+
+                # zapisuj manifest na bieżąco (odporność na przerwanie)
+                save_manifest(manifest_path, manifest)
+
+                if idx % 25 == 0:
+                    print(f"Postęp {idx}/{len(exam_pages)}")
+
             except Exception as e:
-                if LOG_ERRORS:
-                    print("ERROR GET", u, repr(e))
-            sleep_polite(SLEEP)
+                print(f"[{subject}] ERROR na {exam_url}: {e}")
 
-    locs = collect_sitemap_locs()
-    print("Sitemap URL-e łącznie:", len(locs))
+    print(f"\nGotowe. Nowe pliki: {total_new}, pominięte (już były): {total_skipped}")
+    print(f"Manifest: {manifest_path}")
 
-    # Dodatkowo: od razu wyciągnij PDF-y jeśli jednak są w sitemap
-    for subject in SUBJECTS:
-        pdfs = set(u for u in locs if is_osmoklasisty_pdf(u, subject))
-
-        # Dołóż ręcznie podane PDF-y
-        for u in DIRECT_PDFS.get(subject, []):
-            u = canonicalize(u)
-            if is_osmoklasisty_pdf(u, subject):
-                pdfs.add(u)
-            elif LOG_ERRORS:
-                print("WARN direct URL nie pasuje do filtra PDF:", u)
-
-        # A jeśli nie ma PDF-ów w sitemap, to crawl stron z sitemap i wyciągnij z HTML
-        candidate_pages = [u for u in locs if is_candidate_page(u, subject)]
-        print(f"\n{subject}: strony do sprawdzenia:", len(candidate_pages))
-
-        for i, page in enumerate(candidate_pages, 1):
-            if LOG_EACH_PAGE:
-                print(f"{subject}: CHECK {i}/{len(candidate_pages)} {page}")
-            try:
-                pdfs |= extract_pdf_links_from_page(page, subject)
-            except Exception as e:
-                if LOG_ERRORS:
-                    print(f"{subject}: ERROR page {page}: {e!r}")
-
-            if i % 200 == 0:
-                print(f"{subject}: sprawdzono {i}/{len(candidate_pages)} stron, PDF-y: {len(pdfs)}")
-
-            sleep_polite(SLEEP)
-
-        pdfs = sorted(pdfs)
-        print(f"{subject}: PDF-y znalezione:", len(pdfs))
-
-        # manifest per przedmiot
-        manifest_dir = os.path.join(OUTDIR, subject)
-        ensure_dir(manifest_dir)
-        manifest_path = os.path.join(manifest_dir, "manifest.txt")
-        with open(manifest_path, "w", encoding="utf-8") as f:
-            f.write("\n".join(pdfs) + "\n")
-
-        # download
-        for u in pdfs:
-            if LOG_EACH_DOWNLOAD:
-                dest = target_path(u, subject)
-                rel_dest = os.path.relpath(dest, OUTDIR)
-                if os.path.exists(dest) and not OVERWRITE:
-                    print("PLAN SKIP", u, "->", rel_dest)
-                else:
-                    print("PLAN GET ", u, "->", rel_dest)
-            try:
-                status, path = download_pdf(u, subject)
-                print(status, os.path.relpath(path, OUTDIR))
-            except requests.HTTPError as e:
-                if LOG_ERRORS:
-                    code = getattr(getattr(e, "response", None), "status_code", None)
-                    print("ERROR GET", u, "HTTP", code, e)
-            except Exception as e:
-                if LOG_ERRORS:
-                    print("ERROR GET", u, repr(e))
-            sleep_polite(SLEEP)
 
 if __name__ == "__main__":
     main()
