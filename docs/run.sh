@@ -1,0 +1,1 @@
+python scrap.py --out pdf --delay 1.2 --jitter 0.8
