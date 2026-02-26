@@ -766,8 +766,36 @@ def build_markdown(
 
 def main(argv: Optional[list[str]] = None) -> int:
     ap = argparse.ArgumentParser(description="Konwersja arkusza PDF do Markdown (struktura zadań).")
-    ap.add_argument("--in", dest="pdf_in", required=True, help="Wejściowy PDF")
-    ap.add_argument("--out", dest="md_out", required=True, help="Wyjściowy plik Markdown")
+    ap.add_argument(
+        "pdf",
+        nargs="?",
+        help="Wejściowy PDF (może być ścieżką względną względem --pdf-root).",
+    )
+    ap.add_argument(
+        "--in",
+        dest="pdf_in",
+        default=None,
+        help="Wejściowy PDF (kompatybilność wstecz; alternatywa dla argumentu pozycyjnego).",
+    )
+    ap.add_argument(
+        "--out",
+        dest="md_out",
+        default=None,
+        help=(
+            "Wyjściowy plik Markdown. Jeśli pominięte, zapisze do --notes-root z zachowaniem struktury względem "
+            "--pdf-root."
+        ),
+    )
+    ap.add_argument(
+        "--pdf-root",
+        default=None,
+        help="Katalog bazowy PDF (domyślnie: docs/pdf obok tego skryptu).",
+    )
+    ap.add_argument(
+        "--notes-root",
+        default=None,
+        help="Katalog bazowy notatek (domyślnie: docs/notes obok tego skryptu).",
+    )
     ap.add_argument("--title", default=None, help="Tytuł H1 (domyślnie: nazwa pliku)")
     ap.add_argument(
         "--backend",
@@ -788,8 +816,31 @@ def main(argv: Optional[list[str]] = None) -> int:
     )
     args = ap.parse_args(argv)
 
-    pdf_path = Path(args.pdf_in)
-    out_path = Path(args.md_out)
+    script_dir = Path(__file__).resolve().parent
+    pdf_root = Path(args.pdf_root) if args.pdf_root else (script_dir / "pdf")
+    notes_root = Path(args.notes_root) if args.notes_root else (script_dir / "notes")
+
+    pdf_in_raw = args.pdf or args.pdf_in
+    if not pdf_in_raw:
+        ap.error("Podaj PDF jako argument pozycyjny albo przez --in.")
+
+    pdf_path = Path(pdf_in_raw)
+    if not pdf_path.is_absolute() and not pdf_path.exists():
+        candidate = pdf_root / pdf_path
+        if candidate.exists():
+            pdf_path = candidate
+
+    if not pdf_path.exists():
+        ap.error(f"Nie znaleziono pliku PDF: {pdf_path}")
+
+    if args.md_out:
+        out_path = Path(args.md_out)
+    else:
+        try:
+            rel = pdf_path.resolve().relative_to(pdf_root.resolve())
+        except Exception:
+            rel = Path(pdf_path.name)
+        out_path = notes_root / rel.with_suffix(".md")
 
     md = build_markdown(
         pdf_path=pdf_path,
