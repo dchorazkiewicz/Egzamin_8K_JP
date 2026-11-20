@@ -103,22 +103,17 @@
     makeLink(record.links.exam, "Arkusz PDF ↗", true);
     makeLink(record.links.answers, "Odpowiedzi ↗", false);
     makeLink(record.links.transcript, "Transkrypcja ↗", false);
-    if (record.links.exam && record.links.answers) {
+    // Only published, fully authored HTML lessons get an "Opracowanie" link.
+    if (record.subject === "jezyk-polski" && record.year === 2026 &&
+        record.links.exam && record.links.answers) {
       const fileName = decodeURIComponent(new URL(record.links.exam).pathname.split("/").pop() || "");
       const stem = fileName.replace(/\.pdf$/i, "");
-      const study = new URL("../opracowanie/", location.href);
-      study.searchParams.set("subject", record.subject);
-      study.searchParams.set("year", String(record.year));
-      study.searchParams.set("name", stem);
-      const a = el("a", "e8-file-link e8-file-link-study", "Opracowanie →");
-      if (record.subject === "jezyk-polski" && record.year === 2026 &&
-          stem === "jezyk-polski-2026-egzamin-osmoklasisty") {
+      if (stem === "jezyk-polski-2026-egzamin-osmoklasisty") {
+        const a = el("a", "e8-file-link e8-file-link-study", "Czytaj opracowanie →");
         a.href = new URL("../opracowania/polski-2026/", location.href).href;
-      } else {
-        a.href = study.href;
+        a.setAttribute("aria-label", "Pełne opracowanie HTML — język polski, egzamin główny 2026");
+        links.append(a);
       }
-      a.setAttribute("aria-label", "Opracowanie — " + info.name + " " + record.year + ", " + record.title);
-      links.append(a);
     }
     card.append(links);
     return card;
