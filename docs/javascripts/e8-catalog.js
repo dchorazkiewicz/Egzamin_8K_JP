@@ -111,7 +111,12 @@
       study.searchParams.set("year", String(record.year));
       study.searchParams.set("name", stem);
       const a = el("a", "e8-file-link e8-file-link-study", "Opracowanie →");
-      a.href = study.href;
+      if (record.subject === "jezyk-polski" && record.year === 2026 &&
+          stem === "jezyk-polski-2026-egzamin-osmoklasisty") {
+        a.href = new URL("../opracowania/polski-2026/", location.href).href;
+      } else {
+        a.href = study.href;
+      }
       a.setAttribute("aria-label", "Opracowanie — " + info.name + " " + record.year + ", " + record.title);
       links.append(a);
     }
