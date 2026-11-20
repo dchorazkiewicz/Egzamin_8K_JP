@@ -1,0 +1,61 @@
+/* English 2026 exam study – use the existing restrained E8 type scale. */
+.e8-en-study { --en-border: var(--lr-line,#e3e8f0); --en-paper:var(--lr-paper,#fff); --en-ink:var(--lr-ink,#15213b); --en-muted:var(--lr-muted,#63748b); --en-primary:var(--lr-accent,#515bdf); }
+.e8-en-hero-badge { display:inline-flex; align-items:center; gap:8px; padding:6px 11px; border-radius:999px; border:1px solid rgba(255,255,255,.22); color:#dde7ff; font-size:var(--e8-font-caption,13px); font-weight:700; letter-spacing:.015em; }
+.e8-en-note { padding:15px 18px; background:var(--en-paper); border:1px solid var(--en-border); border-radius:12px; margin-bottom:14px; font-size:var(--e8-font-small,14px); line-height:1.65; color:var(--en-muted); }
+.e8-en-listenbar { background:#f7f8fc; border:1px solid #dbe3f3; display:flex; flex-wrap:wrap; gap:10px; align-items:center; padding:14px 17px; border-radius:13px; margin:0 0 20px; }
+[data-md-color-scheme="slate"] .e8-en-listenbar { background:#1b2940; border-color:#3a4765; }
+.e8-en-listenbar strong { font-size:var(--e8-font-small,14px); color:var(--en-ink); }
+.e8-en-listenbar select { background:var(--en-paper); color:var(--en-ink); border:1px solid var(--en-border); border-radius:9px; padding:8px 10px; font-size:var(--e8-font-small,14px); min-height:40px; }
+.e8-en-listenbar button, .e8-en-speak-button { border:1px solid #c0c8f1; border-radius:10px; background:#eef0ff; color:#3947b2; padding:8px 13px; font:700 var(--e8-font-small,14px)/1.4 Inter,system-ui,sans-serif; cursor:pointer; }
+.e8-en-speak-button:hover,.e8-en-listenbar button:hover { border-color:#6875db; background:#e3e6ff; }
+.e8-en-speak-button.is-speaking { background:#ffdb9b; border-color:#e7a04a; color:#71410c; }
+.e8-en-speak-button:disabled, .e8-en-listenbar button:disabled { opacity:.55; cursor:not-allowed; }
+.e8-en-listenbar .e8-tts-feedback { flex-basis:100%; font-size:var(--e8-font-caption,13px); color:var(--en-muted); min-height:19px; }
+.e8-en-lesson { background:var(--en-paper); border:1px solid var(--en-border); border-radius:15px; overflow:hidden; margin:0 0 17px; scroll-margin-top:105px; box-shadow:0 8px 25px rgba(25,45,85,.035); }
+.e8-en-lesson-header { display:flex; align-items:center; justify-content:space-between; gap:13px; flex-wrap:wrap; padding:19px 24px; border-bottom:1px solid var(--en-border); }
+.e8-en-lesson-heading { display:flex; align-items:center; gap:12px; }
+.e8-en-lesson-number { background:#ecefff; color:#424dc5; border-radius:11px; padding:9px 10px; min-width:43px; text-align:center; font-weight:800; font-size:var(--e8-font-card,17px); }
+.e8-en-lesson h3 { margin:0; font-size:var(--e8-font-subheading,19px)!important; font-weight:780; letter-spacing:-.01em; color:var(--en-ink); }
+.e8-en-lesson-subtitle { margin:0; font-size:var(--e8-font-caption,13px); color:var(--en-muted); }
+.e8-en-lesson-points { border:1px solid var(--en-border); border-radius:7px; padding:4px 8px; white-space:nowrap; color:var(--en-muted); font-size:var(--e8-font-small,14px); }
+.e8-en-lesson-body { padding:22px 25px 22px; }
+.e8-en-lesson-body > p { font-size:var(--e8-font-body,16px)!important; line-height:1.68!important; }
+.e8-en-lesson-section-title { font-size:var(--e8-font-small,14px); text-transform:uppercase; letter-spacing:.045em; color:var(--en-primary); font-weight:800; margin:10px 0 8px; }
+.e8-en-study .e8-speakable { font-size:var(--e8-font-body,16px)!important; line-height:1.82!important; color:var(--en-ink); background:#f8fafc; border:1px solid var(--en-border); border-radius:11px; padding:18px 20px; margin:0 0 12px; }
+[data-md-color-scheme="slate"] .e8-en-study .e8-speakable { background:#1d2a40; }
+.e8-en-study .e8-speakable p { font-size:var(--e8-font-body,16px)!important; line-height:1.82!important; margin:0 0 10px!important; }
+.e8-en-study .e8-speakable p:last-child { margin-bottom:0!important; }
+.e8-en-study .e8-speakable em { font-style:italic; }
+.e8-en-study .e8-speakable strong { font-weight:820; }
+.e8-en-speak-row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin:5px 0 18px; }
+.e8-en-speak-row .e8-en-accent { color:var(--en-muted); font-size:var(--e8-font-caption,13px); }
+.e8-en-choices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin:12px 0 20px; }
+.e8-en-choice { display:flex; gap:12px; align-items:flex-start; background:var(--en-paper); border:1px solid var(--en-border); border-radius:9px; padding:11px 12px; font-size:var(--e8-font-small,14px); }
+.e8-en-choice b { color:var(--en-primary); white-space:nowrap; }
+.e8-en-gridanswers { width:100%; border-collapse:collapse; margin:12px 0; }
+.e8-en-gridanswers th,.e8-en-gridanswers td { border-bottom:1px solid var(--en-border); padding:9px; text-align:left; font-size:var(--e8-font-small,14px)!important; }
+.e8-en-gridanswers th { color:var(--en-muted); font-weight:740; }
+.e8-en-good-answer { display:flex; gap:12px; align-items:start; border:1px solid #c6d5f9; border-left:4px solid #5966d8; border-radius:11px; background:#f1f4ff; padding:14px 17px; color:#263977; margin:18px 0; }
+[data-md-color-scheme="slate"] .e8-en-good-answer { background:#253150;color:#e0e6ff; }
+.e8-en-good-answer strong { font-size:var(--e8-font-card,17px); font-weight:810; display:block; line-height:1.5; }
+.e8-en-good-answer small { font-size:var(--e8-font-caption,13px)!important; display:block; color:var(--en-muted); }
+.e8-en-explain { font-size:var(--e8-font-body,16px)!important; line-height:1.72!important; }
+.e8-en-explain li { font-size:var(--e8-font-body,16px)!important; margin-bottom:9px; }
+.e8-en-tip { padding:13px 16px; background:#fff7ec; border:1px solid #f4d6af; color:#755021; border-radius:10px; margin:15px 0; font-size:var(--e8-font-small,14px); }
+[data-md-color-scheme="slate"] .e8-en-tip { background:#382c21; border-color:#6b4f31; color:#ecd8bc; }
+.e8-en-lesson-links { border-top:1px solid var(--en-border); display:flex; gap:14px; flex-wrap:wrap; padding-top:12px; margin-top:15px; }
+.e8-en-lesson-links a { font-weight:760; font-size:var(--e8-font-small,14px); }
+.e8-en-lesson[data-status="pilot"] .e8-en-lesson-subtitle::after { content:" · autorska adaptacja"; }
+.e8-en-micro { color:var(--en-muted); font-size:var(--e8-font-small,14px)!important; line-height:1.6!important; }
+.e8-en-progress { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; margin:0 0 21px; }
+.e8-en-progress > div { border:1px solid var(--en-border); background:var(--en-paper); border-radius:12px; padding:15px 18px; font-size:var(--e8-font-small,14px); color:var(--en-muted); }
+.e8-en-progress strong { font-size:var(--e8-font-section,22px); color:var(--en-ink); display:block; }
+.e8-en-lesson h4 { font-size:var(--e8-font-card,17px)!important; margin:18px 0 9px; }
+.e8-en-sticky a { color:var(--en-primary); }
+.e8-en-lesson .e8-en-why { font-size:var(--e8-font-small,14px); color:var(--en-muted); }
+.e8-en-level { font-size:var(--e8-font-small,14px); color:var(--en-muted); margin:0 0 8px; }
+@media(max-width:740px) {
+  .e8-en-lesson-header,.e8-en-lesson-body { padding:15px; }
+  .e8-en-choices { grid-template-columns:1fr; }
+  .e8-en-lesson-links {gap:10px;}
+}
