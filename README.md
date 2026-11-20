@@ -10,7 +10,7 @@ PDF-y są dokumentami źródłowymi, a **strona HTML jest właściwym środowisk
 
 - **Polski 2026:** [opracowanie do przewijania](https://dchorazkiewicz.github.io/Egzamin_8K_JP/opracowania/polski-2026/).
 - **Angielski 2026:** [pilotażowe opracowanie 14 zadań](https://dchorazkiewicz.github.io/Egzamin_8K_JP/opracowania/angielski-2026/) — odpowiedzi wersji X, komentarze oraz autorskie teksty ćwiczeniowe z przyciskami odsłuchu w przeglądarce.
-- **Matematyka:** następne opracowania w takim samym formacie; dla wzorów konieczna jest wizualna kontrola zapisów i diagramów.
+- **Matematyka 2026:** [pełne rozwiązania HTML](https://dchorazkiewicz.github.io/Egzamin_8K_JP/opracowania/matematyka-2026/) — 20 zadań, 74 etapy rachunków, kolorowe bloki, schematy oraz wskazówki punktowe dla zadań otwartych (wersja X).
 
 ## Jak tworzymy opracowania?
 
