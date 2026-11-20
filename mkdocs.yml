@@ -3,6 +3,7 @@ site_description: Repozytorium materiałów i opracowań egzaminacyjnych.
 
 extra_css:
   - stylesheets/e8-modern.css
+  - stylesheets/e8-dropdown-fix.css
   - stylesheets/e8-longread.css
 
 extra_javascript:
