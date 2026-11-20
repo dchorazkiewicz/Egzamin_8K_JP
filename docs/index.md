@@ -2,10 +2,10 @@
   <div class="e8-hero-copy">
     <span class="e8-kicker">Twoja baza przygotowań • Klasa 8</span>
     <h1>Egzamin zaczyna się od <em>dobrego planu.</em></h1>
-    <p>Arkusze z poprzednich lat, klucze odpowiedzi i materiały do powtórek. Wszystko uporządkowane według przedmiotu, rocznika i terminu.</p>
+    <p>Arkusze z poprzednich lat, klucze odpowiedzi i opracowania zadań. Wszystko uporządkowane według przedmiotu, rocznika i terminu.</p>
     <div class="e8-actions">
       <a class="e8-button" href="pdfs/">Przeglądaj arkusze <span aria-hidden="true">↗</span></a>
-      <a class="e8-button e8-button--ghost" href="notatki-jezyk-polski/">Przejdź do notatek <span aria-hidden="true">→</span></a>
+      <a class="e8-button e8-button--ghost" href="pdfs/?subject=jezyk-polski">Język polski <span aria-hidden="true">→</span></a>
     </div>
   </div>
   <div class="e8-hero-visual" aria-hidden="true">
@@ -23,8 +23,8 @@
 </section>
 
 <div class="e8-stat-strip" aria-label="Zawartość biblioteki">
-  <div class="e8-stat"><strong>140</strong><span>plików PDF w bibliotece</span></div>
-  <div class="e8-stat"><strong>60</strong><span>zestawów egzaminacyjnych</span></div>
+  <div class="e8-stat"><strong>154</strong><span>plików PDF w bibliotece</span></div>
+  <div class="e8-stat"><strong>66</strong><span>zestawów egzaminacyjnych</span></div>
   <div class="e8-stat"><strong>3</strong><span>przedmioty do powtórzenia</span></div>
 </div>
 
@@ -61,9 +61,10 @@
 
 <section class="e8-note-callout">
   <div>
-    <span class="e8-kicker">Nie tylko testy</span>
-    <h2>Potrzebujesz powtórki przed egzaminem?</h2>
-    <p>Skorzystaj z notatek do języka polskiego, matematyki i angielskiego.</p>
+    <span class="e8-kicker">Arkusz · odpowiedzi · nauka</span>
+    <h2>Wybierz egzamin i zacznij pracę z zadaniami</h2>
+    <p>Otwórz wybrany przedmiot, wybierz rocznik, a następnie kliknij odpowiedni kafelek.
+    Tam znajdziesz arkusz, klucz oraz przycisk czytania, jeśli opracowanie HTML jest dostępne.</p>
   </div>
-  <a class="e8-button e8-button--color" href="notatki-jezyk-polski/">Otwórz materiały →</a>
+  <a class="e8-button e8-button--color" href="pdfs/">Przejdź do arkuszy →</a>
 </section>
