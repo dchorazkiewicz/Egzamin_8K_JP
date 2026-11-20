@@ -1,0 +1,31 @@
+/* Explicit dropdown fix for MkDocs Material / Chromium. */
+.e8-toolbar-fields select.e8-select {
+  -webkit-appearance: menulist !important;
+  appearance: auto !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  width: 100% !important;
+  height: 46px !important;
+  min-height: 46px !important;
+  margin: 0 !important;
+  padding: 0 14px !important;
+  font: 600 14px/normal Inter, system-ui, -apple-system, "Segoe UI", sans-serif !important;
+  text-align: left !important;
+  text-align-last: left !important;
+  vertical-align: middle !important;
+  overflow: visible !important;
+  background-color: var(--md-default-bg-color,#fff) !important;
+  color: var(--e8-text) !important;
+}
+.e8-toolbar-fields label { display: block !important; min-width: 164px; }
+.e8-toolbar-fields input.e8-input {
+  box-sizing:border-box !important;
+  height:46px !important;
+  min-height:46px !important;
+  padding: 0 14px !important;
+  line-height: normal !important;
+  font-size: 14px !important;
+}
+@media (max-width:760px) {
+  .e8-toolbar-fields label { flex: 1 1 145px; min-width: 0; }
+}
