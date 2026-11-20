@@ -16,6 +16,7 @@ extra_javascript:
   - javascripts/e8-study-polish-2026.js
   - javascripts/e8-study.js
   - javascripts/e8-tts.js
+  - javascripts/e8-mathjax.js
 
 nav:
   - Start: index.md
