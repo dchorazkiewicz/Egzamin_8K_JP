@@ -6,17 +6,20 @@ extra_css:
   - stylesheets/e8-dropdown-fix.css
   - stylesheets/e8-longread.css
   - stylesheets/e8-type-scale.css
+  - stylesheets/e8-english.css
 
 extra_javascript:
   - javascripts/e8-catalog.js
   - javascripts/e8-study-data.js
   - javascripts/e8-study-polish-2026.js
   - javascripts/e8-study.js
+  - javascripts/e8-tts.js
 
 nav:
   - Start: index.md
   - Arkusze PDF: pdfs.md
-  - Opracowanie: opracowania/polski-2026.md
+  - Opracowanie (JP): opracowania/polski-2026.md
+  - Opracowanie (ANG): opracowania/angielski-2026.md
   - Notatki (JP): notatki-jezyk-polski.md
   - Notatki (MAT): notatki-matematyka.md
   - Notatki (ANG): notatki-jezyk-angielski.md
