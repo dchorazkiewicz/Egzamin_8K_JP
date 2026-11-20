@@ -1,0 +1,225 @@
+/*
+ * E8 · Unified compact type scale, November 2026
+ *
+ * One scale for all pages (desktop and mobile):
+ * body 16px, small/metadata 13–14px, cards 16–18px,
+ * section titles 21–23px, page titles 27–30px.
+ * No microscopic 9px labels or 60px banners.
+ */
+:root {
+  --e8-font-body: 16px;
+  --e8-font-small: 14px;
+  --e8-font-caption: 13px;
+  --e8-font-card: 17px;
+  --e8-font-subheading: 19px;
+  --e8-font-section: 22px;
+  --e8-font-page: 29px;
+  --e8-font-display: 32px;
+  --e8-line-body: 1.63;
+  --e8-line-heading: 1.22;
+}
+
+/* Shared typography: MkDocs structure, heading rhythm and inline text */
+body, .md-typeset, .md-content__inner, .e8-longread {
+  font-size: var(--e8-font-body) !important;
+  line-height: var(--e8-line-body);
+}
+.md-typeset h1,
+.e8-landing-page .md-typeset h1,
+.e8-catalog-page .md-typeset h1,
+.e8-study-page .md-typeset h1 {
+  font-size: var(--e8-font-page) !important;
+  line-height: var(--e8-line-heading) !important;
+  letter-spacing: -.025em !important;
+}
+.md-typeset h2,
+.e8-landing-page .md-typeset h2,
+.e8-catalog-page .md-typeset h2,
+.e8-study-page .md-typeset h2 {
+  font-size: var(--e8-font-section) !important;
+  line-height: 1.27 !important;
+  letter-spacing: -.018em !important;
+}
+.md-typeset h3 {
+  font-size: var(--e8-font-subheading) !important;
+  line-height: 1.32 !important;
+  letter-spacing: -.01em !important;
+}
+.md-typeset h4 { font-size: var(--e8-font-card) !important; line-height: 1.35 !important; }
+.md-typeset p, .md-typeset li { line-height: var(--e8-line-body); }
+.md-typeset small,
+.md-typeset .md-source-file,
+.md-typeset .md-source-file__fact,
+.md-typeset .footnote,
+.md-typeset .admonition-title { font-size: var(--e8-font-caption) !important; }
+.md-header__title, .md-tabs__link { font-size: var(--e8-font-body) !important; }
+.md-nav__link, .md-nav__title, .md-footer { font-size: var(--e8-font-small) !important; }
+
+/* Homepage – headline is larger than body but no poster-sized type */
+.e8-landing-page .e8-hero h1,
+.e8-landing-page .md-typeset .e8-hero h1,
+.e8-longread-page .e8-longread-hero h1 {
+  font-size: var(--e8-font-display) !important;
+  line-height: 1.19 !important;
+  letter-spacing: -.035em !important;
+}
+.e8-hero p,
+.e8-hero .e8-hero-copy p,
+.e8-longread .e8-longread-lead {
+  font-size: var(--e8-font-body) !important;
+  line-height: 1.65 !important;
+}
+.e8-kicker,
+.e8-longread .e8-longread-overline,
+.e8-longread .e8-longread-pill,
+.e8-longread .e8-article-grouphead > span {
+  font-size: var(--e8-font-caption) !important;
+  letter-spacing: .035em !important;
+  line-height: 1.4 !important;
+}
+.e8-hero .e8-feature-tag,
+.e8-hero .e8-feature-card p,
+.e8-hero .e8-feature-foot,
+.e8-hero .e8-float-pill,
+.e8-longread .e8-longread-hero-mark small,
+.e8-longread .e8-longread-hero-mark i {
+  font-size: var(--e8-font-small) !important;
+}
+.e8-hero .e8-feature-card h3,
+.e8-note-callout h2 { font-size: var(--e8-font-subheading) !important; }
+.e8-hero .e8-button,
+.e8-note-callout .e8-button { font-size: var(--e8-font-small) !important; }
+.e8-stat strong { font-size: 24px !important; }
+.e8-stat span,
+.e8-section-heading p,
+.e8-subject-desc,
+.e8-subject-more,
+.e8-note-callout p { font-size: var(--e8-font-small) !important; }
+.e8-section-heading h2 { font-size: var(--e8-font-section) !important; }
+.e8-subject-title { font-size: var(--e8-font-card) !important; }
+.e8-subject-icon { font-size: var(--e8-font-body) !important; }
+
+/* PDF catalog – consistent size even in the many tiny controls */
+.e8-catalog-hero h1 { font-size: var(--e8-font-page) !important; }
+.e8-catalog-hero p { font-size: var(--e8-font-body) !important; }
+.e8-catalog-count strong { font-size: 25px !important; }
+.e8-catalog-count span,
+.e8-toolbar-foot, .e8-toolbar-foot strong,
+.e8-list-title span { font-size: var(--e8-font-small) !important; }
+.e8-list-title h2 { font-size: var(--e8-font-section) !important; }
+.e8-chip, .e8-chip.is-active,
+.e8-toolbar-fields .e8-select,
+.e8-toolbar-fields input.e8-input {
+  font-size: var(--e8-font-small) !important;
+}
+.e8-card-subject,
+.e8-card-year,
+.e8-card-type,
+.e8-exam-card p,
+.e8-file-link,
+.md-typeset a.e8-file-link,
+.e8-catalog-hero .e8-kicker,
+.e8-feature-study small,
+.e8-feature-study em,
+.e8-feature-study b { font-size: var(--e8-font-small) !important; }
+.e8-card-avatar { font-size: var(--e8-font-caption) !important; }
+.e8-exam-card h3, .e8-feature-study strong { font-size: var(--e8-font-card) !important; }
+.e8-feature-study small { letter-spacing: .025em !important; }
+
+/* Older paired-PDF view remains proportionate too */
+.e8-study-hero h1 { font-size: var(--e8-font-page) !important; }
+.e8-study-hero p,
+.e8-study-notice p,
+.e8-study-hint,
+.e8-study-lesson li,
+.e8-study-example p { font-size: var(--e8-font-body) !important; }
+.e8-study-nav > strong,
+.e8-study-task-top h2 { font-size: var(--e8-font-subheading) !important; }
+.e8-task-nav-button strong,
+.e8-study-panel-head strong,
+.e8-study-trap strong { font-size: var(--e8-font-small) !important; }
+.e8-task-nav-button span,
+.e8-study-panel-head span,
+.e8-study-task-top #e8-task-category,
+.e8-study-task-top #e8-task-points,
+.e8-study-pager > span,
+.e8-study-trap p,
+.e8-study-nav > span,
+.e8-study-source,
+.e8-study-hero-links a,
+.e8-study-back { font-size: var(--e8-font-small) !important; }
+.e8-study-answer { font-size: var(--e8-font-card) !important; }
+.e8-study-reveal, .e8-study-pager button { font-size: var(--e8-font-small) !important; }
+
+/* Complete Polish HTML longread – this is the priority reading experience */
+.e8-longread,
+.e8-longread p,
+.e8-longread li,
+.e8-longread .e8-source-prose p,
+.e8-longread .e8-article-question p,
+.e8-longread .e8-original-paragraph,
+.e8-longread .e8-article-why li,
+.e8-longread .e8-read-example p,
+.e8-longread .e8-writing-paper p,
+.e8-longread .e8-full-options span,
+.e8-longread .e8-pf-row span,
+.e8-longread .e8-source-quote p,
+.e8-longread .e8-source-quote {
+  font-size: var(--e8-font-body) !important;
+  line-height: 1.69 !important;
+}
+.e8-longread .e8-article-grouphead h2 { font-size: var(--e8-font-section) !important; line-height: 1.3 !important; letter-spacing: -.015em !important; }
+.e8-longread .e8-article-number h3,
+.e8-longread .e8-source-text h3 { font-size: var(--e8-font-subheading) !important; line-height: 1.32 !important; }
+.e8-longread .e8-article-why h4,
+.e8-longread .e8-longread-footer strong { font-size: var(--e8-font-card) !important; }
+.e8-longread .e8-article-answer p { font-size: var(--e8-font-body) !important; }
+.e8-longread .e8-article-grouphead p,
+.e8-longread .e8-article-intro p,
+.e8-longread .e8-article-pitfall p,
+.e8-longread .e8-article-question .e8-fine,
+.e8-longread .e8-source-credit,
+.e8-longread .e8-longread-metrics span,
+.e8-longread .e8-longread-rail p,
+.e8-longread .e8-longread-footer p,
+.e8-longread .e8-topic-grid span {
+  font-size: var(--e8-font-small) !important;
+  line-height: 1.57 !important;
+}
+.e8-longread .e8-article-smalltitle,
+.e8-longread .e8-article-number small,
+.e8-longread .e8-article-points,
+.e8-longread .e8-article-pitfall strong,
+.e8-longread .e8-longread-rail .e8-rail-group,
+.e8-longread .e8-longread-rail .e8-rail-pdf,
+.e8-longread .e8-rail-numbers a,
+.e8-longread .e8-article-source a,
+.e8-longread .e8-longread-top a,
+.e8-longread .e8-longread-start,
+.e8-longread .e8-article-points,
+.e8-longread .e8-photo-grid strong,
+.e8-longread .e8-photo-grid b,
+.e8-longread .e8-source-quote small {
+  font-size: var(--e8-font-caption) !important;
+  letter-spacing: .025em !important;
+}
+.e8-longread .e8-longread-metrics strong { font-size: 23px !important; }
+.e8-longread .e8-longread-hero-mark span { font-size: 36px !important; letter-spacing: -.03em !important; }
+.e8-longread .e8-longread-rail h2 { font-size: var(--e8-font-subheading) !important; }
+.e8-longread .e8-full-options b,
+.e8-longread .e8-pf-row b,
+.e8-longread .e8-topic-grid small,
+.e8-longread .e8-article-question h4,
+.e8-longread .e8-answer-fields,
+.e8-longread .e8-photo-grid strong {
+  font-size: var(--e8-font-small) !important;
+}
+/* Keep photo/illustration glyphs appropriately sized, as graphics */
+.e8-longread .e8-photo-art { font-size: 31px !important; }
+
+/* Mobile: same restrained scale, only page/display headlines step down */
+@media (max-width: 760px) {
+  :root { --e8-font-page: 26px; --e8-font-display: 28px; --e8-font-section: 21px; }
+  .e8-longread .e8-longread-hero h1,
+  .e8-landing-page .e8-hero h1 { font-size: var(--e8-font-display) !important; }
+}
