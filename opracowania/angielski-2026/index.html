@@ -63,7 +63,7 @@
     
   <link rel="stylesheet" href="../../stylesheets/e8-longread.css?v=en2026-1">
 <link rel="stylesheet" href="../../stylesheets/e8-type-scale.css?v=en2026-1">
-<link rel="stylesheet" href="../../stylesheets/e8-english.css?v=en2026-1">
+<link rel="stylesheet" href="../../stylesheets/e8-english.css?v=voice-picker-20261120">
 </head>
   
   
@@ -271,7 +271,23 @@
 <div class="e8-longread e8-en-study">
  <section class="e8-longread-hero"><div class="e8-longread-top"><span class="e8-en-hero-badge">JĘZYK ANGIELSKI · CKE 2026 · OJAP-100 · WERSJA X</span><a href="../../pdfs/?subject=jezyk-angielski">← Wszystkie arkusze</a></div><div class="e8-longread-hero-grid"><div><p class="e8-longread-overline">OPRACOWANIE EDUKACYJNE · WERSJA PILOTAŻOWA</p><h1>Angielski, który<br><em>można odsłuchać.</em></h1><p class="e8-longread-lead">14 zadań egzaminu 2026 z odpowiedziami wersji X i komentarzami dydaktycznymi. Angielskie fragmenty ćwiczeniowe możesz przeczytać lub odsłuchać w przeglądarce. Wszystko na jednej stronie.</p><a class="e8-longread-start" href="#zadanie-1">Zacznij czytać ↓</a></div><div class="e8-longread-hero-mark"><span>EN</span><small>2026</small><i>14 zadań · 55 punktów</i></div></div></section>
  <div class="e8-longread-metrics"><div><strong>14</strong><span>zadań z kluczem X</span></div><div><strong>55</strong><span>punktów łącznie</span></div><div><strong>TTS</strong><span>odsłuch w przeglądarce</span></div><div><strong>110</strong><span>minut egzaminu</span></div></div>
- <section class="e8-en-listenbar" aria-label="Narzędzia odsłuchu"><strong>Odsłuch</strong><label for="e8-tts-rate">Prędkość:</label><select id="e8-tts-rate"><option value="0.8">Wolno · 0,8×</option><option value="0.9" selected>Spokojnie · 0,9×</option><option value="1">Normalnie · 1×</option><option value="1.15">Szybko · 1,15×</option></select><button type="button" data-e8-speak-selection>Odsłuchaj zaznaczenie</button><button type="button" id="e8-tts-stop">Zatrzymaj</button><span class="e8-tts-feedback" id="e8-tts-status" role="status" aria-live="polite">Kliknij „Odsłuchaj po angielsku” przy wybranym tekście.</span></section>
+ <section class="e8-en-listenbar" aria-label="Narzędzia odsłuchu">
+  <strong>Odsłuch angielski</strong>
+  <label for="e8-tts-voice">Głos:</label>
+  <select id="e8-tts-voice" aria-describedby="e8-tts-voice-help"><option value="">Wyszukiwanie głosów…</option></select>
+  <button type="button" id="e8-tts-preview" aria-pressed="false">Sprawdź głos</button>
+  <label for="e8-tts-rate">Tempo:</label>
+  <select id="e8-tts-rate">
+    <option value="0.8">Wolniej · 0,8×</option>
+    <option value="0.9">Spokojnie · 0,9×</option>
+    <option value="1" selected>Naturalne tempo · 1×</option>
+    <option value="1.1">Szybciej · 1,1×</option>
+  </select>
+  <button type="button" data-e8-speak-selection>Odsłuchaj zaznaczenie</button>
+  <button type="button" id="e8-tts-stop">Zatrzymaj</button>
+  <p class="e8-tts-voice-help" id="e8-tts-voice-help">Możesz wybrać dowolny angielski głos dostępny w przeglądarce. Naturalne głosy zależą od urządzenia.</p>
+  <span class="e8-tts-feedback" id="e8-tts-status" role="status" aria-live="polite">Wybierz głos i odsłuchaj próbkę.</span>
+</section>
  <div class="e8-longread-body"><aside class="e8-longread-rail"><div class="e8-longread-rail-inner"><h2>Spis zadań</h2><p>Wybierz numer albo przewijaj stronę.</p><nav class="e8-rail-numbers" aria-label="Nawigacja po zadaniach"><a href="#zadanie-1">01</a><a href="#zadanie-2">02</a><a href="#zadanie-3">03</a><a href="#zadanie-4">04</a><a href="#zadanie-5">05</a><a href="#zadanie-6">06</a><a href="#zadanie-7">07</a><a href="#zadanie-8">08</a><a href="#zadanie-9">09</a><a href="#zadanie-10">10</a><a href="#zadanie-11">11</a><a href="#zadanie-12">12</a><a href="#zadanie-13">13</a><a href="#zadanie-14">14</a></nav><a class="e8-rail-pdf" href="../../pdf/jezyk-angielski/2026/jezyk-angielski-2026-egzamin-osmoklasisty.pdf" target="_blank" rel="noopener noreferrer">Oryginalny arkusz CKE ↗</a></div></aside>
  <main class="e8-longread-main">
  <div class="e8-en-note"><strong>Co jest oryginalne, a co jest opracowaniem?</strong> Numery zadań, punkty i odpowiedzi wersji X sprawdzono w arkuszu i kluczu CKE. Angielskie teksty do odsłuchania są <strong>autorskimi adaptacjami dydaktycznymi</strong>, nie stenogramem CKE. Przy każdym zadaniu znajduje się link do dokładnego oryginału. Część ilustracji i pełnych wariantów z arkusza pozostaje wyłącznie w PDF. To wersja pokazowa do dalszej weryfikacji.</div>
@@ -446,6 +462,6 @@
         <script src="../../javascripts/e8-study.js"></script>
       
     
-  <script src="../../javascripts/e8-tts.js?v=en2026-1" defer></script>
+  <script src="../../javascripts/e8-tts.js?v=voice-picker-20261120" defer></script>
 </body>
 </html>
