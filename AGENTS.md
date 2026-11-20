@@ -55,5 +55,5 @@ Sprawdzone źródła → strona HTML z **rzeczywiście opracowanymi** zadaniami 
 ## Plan rozszerzenia
 
 - **Polski:** rozbudowa opracowań HTML o kolejne sesje i lata, kontrola kryteriów oceniania wypowiedzi pisemnych i wiernego formatowania tekstu.
-- **Matematyka:** ten sam model przewijanej strony; LaTeX/MathJax albo semantyczny HTML dla wyrażeń, rysunki geometryczne wektorowo/wycięte z materiału źródłowego po kontroli praw, rozpisane warianty rozwiązań i punktacja.
+- **Matematyka 2026:** kompletne opracowanie 20 zadań w `docs/opracowania/matematyka-2026.md`, 74 kolorowo oznaczone etapy i wskazówki punktowania zadań 15–20. Matematyka w kolejnych latach powinna wykorzystywać ten układ: dane, sposób, kolejne równania, kontrola, ewentualne alternatywne rozwiązania; bez wyświetlania podglądu PDF jako podstawowego interfejsu.
 - **Angielski:** opracowania z czytaniem, słuchaniem, funkcjami językowymi i pisaniem. Oddzielaj nagranie CKE od autorskiego TTS; oferuj odsłuch poszczególnych akapitów, zatrzymanie i wolniejsze tempo. Wskazuj poziom weryfikacji każdego zestawu.
