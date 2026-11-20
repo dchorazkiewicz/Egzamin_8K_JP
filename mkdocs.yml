@@ -17,12 +17,10 @@ extra_javascript:
 
 nav:
   - Start: index.md
-  - Arkusze PDF: pdfs.md
-  - Opracowanie (JP): opracowania/polski-2026.md
-  - Opracowanie (ANG): opracowania/angielski-2026.md
-  - Notatki (JP): notatki-jezyk-polski.md
-  - Notatki (MAT): notatki-matematyka.md
-  - Notatki (ANG): notatki-jezyk-angielski.md
+  - Arkusze: pdfs.md
+  - Język polski: "https://dchorazkiewicz.github.io/Egzamin_8K_JP/pdfs/?subject=jezyk-polski"
+  - Matematyka: "https://dchorazkiewicz.github.io/Egzamin_8K_JP/pdfs/?subject=matematyka"
+  - Angielski: "https://dchorazkiewicz.github.io/Egzamin_8K_JP/pdfs/?subject=jezyk-angielski"
 
 theme:
   name: material
