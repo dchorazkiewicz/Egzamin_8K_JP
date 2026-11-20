@@ -296,3 +296,26 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", 
   .e8-toolbar-fields label { flex: 1 1 145px; min-width: 0; }
   .e8-toolbar-fields input.e8-input { flex: 1 1 100%; min-width: 0; }
 }
+
+
+/* Direct shortcut to the complete authored HTML lesson. */
+.e8-feature-study {
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  text-decoration:none!important;margin:0 0 1.1rem;padding:1.1rem 1.45rem;
+  color:var(--e8-text)!important;background:var(--md-default-bg-color,#fff);
+  border:1px solid #cbd1ff;border-radius:16px;
+  box-shadow:0 9px 26px rgba(43,63,150,.055);
+}
+.e8-feature-study:hover { border-color:#858eef;box-shadow:0 11px 29px rgba(43,63,150,.10); }
+.e8-feature-study span { display:grid;gap:2px; }
+.e8-feature-study small { font-size:10px;letter-spacing:1px;color:var(--e8-primary);font-weight:850; }
+.e8-feature-study strong { display:block;font-size:15px;font-weight:850;line-height:1.35; }
+.e8-feature-study em { font-style:normal;color:var(--e8-muted);font-size:12px;line-height:1.5; }
+.e8-feature-study b { display:inline-flex;align-items:center;justify-content:center;
+ background:#515bdf;border-radius:10px;padding:12px 14px;
+ color:#fff;white-space:nowrap;font-size:12px;font-weight:800;
+}
+@media(max-width:760px) {
+  .e8-feature-study {flex-direction:column;align-items:flex-start;padding:1rem;}
+  .e8-feature-study b {width:100%;}
+}
