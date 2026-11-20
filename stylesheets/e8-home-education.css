@@ -1,0 +1,251 @@
+/* Homepage education artwork: notebook, real math, books and languages */
+.e8-landing-page .e8-hero {
+  padding: clamp(24px, 4vw, 48px);
+  gap: clamp(20px, 3vw, 44px);
+}
+.e8-landing-page .e8-hero-visual {
+  display:block;
+  min-width:0;
+  padding:0;
+}
+.e8-knowledge-scene {
+  position:relative;
+  isolation:isolate;
+  width:min(100%,420px);
+  height:354px;
+  margin-inline:auto;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+.e8-knowledge-notebook {
+  position:absolute;
+  z-index:2;
+  top:38px;
+  left:9%;
+  width:82%;
+  min-height:282px;
+  display:grid;
+  grid-template-columns:24px minmax(0,1fr);
+  background:#fffdf9;
+  color:#1a2942;
+  border:1px solid #f3f5fa;
+  border-radius:17px;
+  box-shadow:0 24px 50px rgba(6,14,40,.32),0 5px 0 rgba(208,219,245,.38);
+  transform:rotate(-3deg);
+  overflow:hidden;
+}
+.e8-knowledge-binding {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:space-evenly;
+  padding:9px 0;
+  background:linear-gradient(90deg,#e2e9f5,#f2f6fb);
+  border-right:1px solid #d1dce8;
+}
+.e8-knowledge-binding i {
+  display:block;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#9baecc;
+  box-shadow:inset 0 2px 3px rgba(33,50,83,.25),0 0 0 2px #f7faff;
+}
+.e8-knowledge-page {
+  padding:20px 20px 15px;
+  background:repeating-linear-gradient(
+    to bottom,#fffdf9 0px,#fffdf9 31px,
+    rgba(66,109,178,.09) 32px,#fffdf9 33px
+  );
+}
+.e8-knowledge-page-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  color:#6d7d97;
+  font-weight:800;
+  font-size:11px;
+  letter-spacing:.045em;
+}
+.e8-knowledge-index {
+  font-size:11px;
+  color:#6f79cc;
+  background:#ecedfc;
+  border-radius:7px;
+  padding:3px 7px;
+  white-space:nowrap;
+}
+.e8-knowledge-title {
+  color:#233963;
+  font-size:18px;
+  line-height:1.3;
+  font-weight:800;
+  letter-spacing:-.02em;
+  margin:14px 0 12px;
+}
+.e8-knowledge-lesson {
+  background:#fff;
+  border:1px solid #e3e9f4;
+  border-radius:11px;
+  box-shadow:0 7px 22px rgba(45,64,115,.08);
+  padding:13px 15px;
+}
+.e8-knowledge-lesson-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  font-size:11px;
+  font-weight:850;
+  color:#5665b7;
+  letter-spacing:.035em;
+}
+.e8-knowledge-task-mark {
+  font-size:10px;
+  padding:3px 7px;
+  background:#edf0fd;
+  border-radius:6px;
+}
+.e8-knowledge-question {
+  font-size:15px;
+  line-height:1.45;
+  color:#25334c;
+  margin:10px 0 7px;
+  font-weight:640;
+}
+.e8-knowledge-equation {
+  font-size:18px;
+  line-height:1.45;
+  font-weight:760;
+  letter-spacing:-.015em;
+  color:#5460a9;
+}
+.e8-knowledge-equation strong {
+  font-weight:880;
+  color:#15856c;
+  border-radius:5px;
+  background:#e5f5ed;
+  padding:2px 6px;
+}
+.e8-knowledge-method {
+  font-size:12px;
+  color:#7f8ca2;
+  margin-top:8px;
+}
+.e8-knowledge-page-footer {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:13px;
+  border-top:1px solid #e6eaf3;
+  padding-top:9px;
+  font-size:11px;
+  font-weight:700;
+  color:#637391;
+}
+.e8-knowledge-page-footer>span:first-child {display:flex;align-items:center;gap:6px;}
+.e8-knowledge-page-footer b {width:7px;height:7px;border-radius:50%;background:#18a684;display:inline-block;}
+.e8-knowledge-symbol {
+  position:absolute;
+  z-index:1;
+  color:#d9e1ff;
+  font-weight:600;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:40px;
+  line-height:1;
+  opacity:.62;
+}
+.e8-knowledge-symbol--sum {right:0;top:0;transform:rotate(13deg);}
+.e8-knowledge-symbol--pi {left:2%;bottom:4px;transform:rotate(-16deg);}
+.e8-knowledge-book-mark {
+  position:absolute;
+  z-index:3;
+  display:grid;
+  place-items:center;
+  top:7px;
+  left:0;
+  width:61px;
+  height:61px;
+  border-radius:17px;
+  color:#d8e4ff;
+  background:#465b9f;
+  box-shadow:0 13px 25px rgba(3,11,42,.22);
+  transform:rotate(-10deg);
+}
+.e8-knowledge-language-note {
+  position:absolute;
+  z-index:4;
+  left:0;
+  bottom:0;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 13px;
+  background:#fff;
+  color:#293954;
+  border-radius:12px;
+  box-shadow:0 12px 27px rgba(2,11,38,.22);
+  transform:rotate(3deg);
+  font-size:13px;
+  font-weight:800;
+}
+.e8-knowledge-note-icon {
+  display:grid;
+  place-items:center;
+  width:35px;height:35px;
+  border-radius:9px;
+  background:#f6e9dc;
+  color:#a46b31;
+  font-size:15px;
+  font-weight:830;
+}
+.e8-knowledge-language-note small {
+  display:block;
+  margin-top:2px;
+  font-size:11px!important;
+  font-weight:570;
+  color:#77869b;
+}
+.e8-knowledge-english-note {
+  position:absolute;
+  z-index:4;
+  right:0;
+  top:18px;
+  display:grid;
+  gap:1px;
+  padding:12px 14px;
+  background:#dff7f2;
+  color:#147568;
+  border:1px solid #b7e9df;
+  border-radius:12px;
+  box-shadow:0 12px 25px rgba(0,15,37,.16);
+  transform:rotate(7deg);
+}
+.e8-knowledge-english-note span {font-size:17px;font-weight:840;line-height:1.1;}
+.e8-knowledge-english-note small {font-size:11px!important;font-weight:680;color:#397d74;}
+@media(max-width:760px) {
+  .e8-landing-page .e8-hero-visual {
+    display:block!important;
+    width:100%;
+    max-width:450px;
+    margin-inline:auto;
+  }
+  .e8-knowledge-scene {height:344px;}
+  .e8-knowledge-notebook {top:31px;}
+  .e8-knowledge-page {padding:17px 13px 14px;}
+  .e8-knowledge-title {font-size:17px;}
+  .e8-knowledge-lesson {padding:12px 11px;}
+  .e8-knowledge-language-note {bottom:4px;}
+}
+@media(max-width:420px) {
+  .e8-knowledge-scene {height:313px;}
+  .e8-knowledge-notebook {grid-template-columns:18px minmax(0,1fr);width:87%;left:5%;min-height:263px;}
+  .e8-knowledge-book-mark {width:48px;height:48px;}
+  .e8-knowledge-book-mark svg {width:26px;height:26px;}
+  .e8-knowledge-title {font-size:16px;}
+  .e8-knowledge-page-top {font-size:10px;}
+  .e8-knowledge-lesson-top {font-size:10px;}
+  .e8-knowledge-equation {font-size:16px;}
+  .e8-knowledge-language-note {padding:7px 9px;font-size:12px;}
+}
