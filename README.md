@@ -19,7 +19,7 @@ PDF-y są dokumentami źródłowymi, a **strona HTML jest właściwym środowisk
 3. Ręcznie opracowujemy zadania do semantycznego HTML. Dla materiałów wymagających odrębnych praw autorskich używamy krótkich cytatów albo jawnie oznaczonych adaptacji i linkujemy oryginał.
 4. Każdą odpowiedź porównujemy z kluczem odpowiedniej wersji CKE, uwzględniając zasady oceniania zadań otwartych.
 5. Dodajemy wyjaśnienia, różnice między dystraktorami, przykłady, typowe błędy.
-6. Dla angielskiego dodajemy odsłuch przez **SpeechSynthesis**, używając głosu angielskiego z urządzenia ucznia; to **nie jest oryginalna ścieżka audio CKE**.
+6. Dla angielskiego dodajemy odsłuch przez **SpeechSynthesis**, używając głosu angielskiego z urządzenia ucznia. Dodano **wybór głosu i próbkę przed odsłuchem**, bo domyślne głosy mogą być robotyczne. Jakość głosu zależy od przeglądarki/systemu; sam Web Speech API nie gwarantuje głosu neuralnego. To **nie jest oryginalna ścieżka audio CKE**.
 7. Weryfikujemy układ i linki na urządzeniach mobilnych i desktopie, aktualizujemy `main` oraz publikowaną gałąź `gh-pages`.
 
 Szczegółowa procedura i reguły dla kolejnych agentów znajdują się w **[AGENTS.md](AGENTS.md)**. Ten dokument jest źródłem zasad redakcyjnych i kontroli jakości.
