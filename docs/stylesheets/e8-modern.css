@@ -239,3 +239,14 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", 
  .e8-study-lesson #e8-solution{padding:0 .9rem .8rem}
  .e8-study-reveal{margin:0 .9rem .8rem;width:calc(100% - 1.8rem)}
 }
+
+/* Language study: preserved source text, models, and reading links */
+.e8-study-page .e8-reading-link{display:block;padding:.75rem 1rem;font-size:.69rem;font-weight:800;text-decoration:none;border-top:1px solid var(--e8-border)}
+.e8-study-page .e8-reading-link[hidden]{display:none}
+.e8-study-example{padding:1rem 1.05rem;margin:1.2rem 0;background:var(--e8-bg);border:1px solid var(--e8-border);border-radius:12px}
+.e8-study-example strong{font-size:.73rem;color:var(--e8-text);display:block;margin-bottom:.55rem}
+.e8-study-example p{font-size:.76rem;line-height:1.85;white-space:pre-line;color:var(--e8-text);margin:0}
+.e8-study-model{border-left:3px solid var(--e8-primary)}
+.e8-study-model p{font-size:.74rem;line-height:1.86}
+.e8-study-panes #e8-question-view{min-height:650px}
+@media(max-width:750px){.e8-study-panes #e8-question-view{min-height:450px}}
