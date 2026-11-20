@@ -1,134 +1,213 @@
-/* English read-aloud controls: no external services, no audio files, user gesture only. */
+/* English study audio: best available browser voice, manual selection and sample.
+   Web Speech API quality is supplied by the browser/OS, not this web page. */
 (function () {
   "use strict";
-  const root = () => document.querySelector(".e8-en-study");
+  if (!document.querySelector(".e8-en-study")) return;
+  const synthOK = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+  const synth = synthOK ? window.speechSynthesis : null;
+  const voiceSelect = document.getElementById("e8-tts-voice");
+  const rateSelect = document.getElementById("e8-tts-rate");
+  const statusBox = document.getElementById("e8-tts-status");
+  const helpBox = document.getElementById("e8-tts-voice-help");
+  const previewButton = document.getElementById("e8-tts-preview");
+  const stopButton = document.getElementById("e8-tts-stop");
+  const selectionButton = document.querySelector("[data-e8-speak-selection]");
+  const readButtons = Array.from(document.querySelectorAll(".e8-en-study [data-e8-speak]"));
+  const preferenceKey = "e8-english-voice";
+  let voices = [];
+  let activeUtterance = null;
   let activeButton = null;
-  let activeText = "";
-  let utterance = null;
-  const api = ("speechSynthesis" in window) && ("SpeechSynthesisUtterance" in window);
+  let playToken = 0;
+  let selectedText = "";
 
-  function status(message) {
-    const live = document.getElementById("e8-tts-status");
-    if (live) live.textContent = message;
+  const voiceKey = v => [v.voiceURI, v.name, v.lang].join("|");
+  function status(value) { if (statusBox) statusBox.textContent = value; }
+  function getSavedVoice() {
+    try { return window.localStorage.getItem(preferenceKey); } catch (_) { return null; }
+  }
+  function saveVoice(value) {
+    try { window.localStorage.setItem(preferenceKey, value); } catch (_) { /* privacy mode */ }
+  }
+  function qualityScore(v) {
+    const name = v.name.toLowerCase();
+    let score = 0;
+    if (/natural|neural|premium|enhanced|online/.test(name)) score += 100;
+    if (/siri|aria|jenny|ryan|sonia|libby|microsoft|google|samantha/.test(name)) score += 20;
+    if (/^en[-_]gb$/i.test(v.lang)) score += 6;
+    if (/^en[-_]us$/i.test(v.lang)) score += 5;
+    return score;
   }
   function resetButtons() {
-    document.querySelectorAll("[data-e8-speak]").forEach(button => {
-      button.classList.remove("is-speaking");
-      button.setAttribute("aria-pressed", "false");
-      button.textContent = button.dataset.defaultLabel || "Odsłuchaj po angielsku";
-    });
+    for (const b of readButtons) {
+      b.classList.remove("is-speaking");
+      b.setAttribute("aria-pressed", "false");
+      b.textContent = b.dataset.defaultLabel || "Odsłuchaj po angielsku";
+    }
+    if (previewButton) {
+      previewButton.classList.remove("is-speaking");
+      previewButton.textContent = "Sprawdź głos";
+      previewButton.setAttribute("aria-pressed", "false");
+    }
+    if (selectionButton) {
+      selectionButton.classList.remove("is-speaking");
+      selectionButton.textContent = "Odsłuchaj zaznaczenie";
+      selectionButton.setAttribute("aria-pressed", "false");
+    }
     activeButton = null;
-    utterance = null;
+    activeUtterance = null;
   }
-  function stop() {
-    if (api) window.speechSynthesis.cancel();
+  function stop(announce = true) {
+    playToken++;
+    if (synth) synth.cancel();
     resetButtons();
-    status("Odsłuch zatrzymany.");
+    if (announce) status("Odsłuch zatrzymany.");
   }
-  function englishVoice() {
-    const voices = window.speechSynthesis.getVoices();
-    return voices.find(v => /^en[-_]GB/i.test(v.lang)) ||
-      voices.find(v => /^en[-_]US/i.test(v.lang)) ||
-      voices.find(v => /^en\b/i.test(v.lang)) || null;
+  function chosenVoice() {
+    const key = voiceSelect?.value;
+    return voices.find(v => voiceKey(v) === key) || voices[0] || null;
   }
-  function textFor(button) {
-    const selector = button.dataset.e8Speak;
-    if (!selector) return "";
-    const target = document.querySelector(selector);
-    if (!target || !root()?.contains(target)) return "";
-    return target.dataset.speechText || target.innerText || target.textContent || "";
-  }
-  function speak(text, button) {
-    if (!api) {
-      status("Ta przeglądarka nie udostępnia syntezy mowy. Spróbuj Chrome, Edge lub Safari.");
+  function populateVoices() {
+    if (!synth || !voiceSelect) return;
+    const found = synth.getVoices().filter(v => /^en(?:[-_]|$)/i.test(v.lang));
+    found.sort((a, b) => qualityScore(b)-qualityScore(a) ||
+      (a.name || "").localeCompare(b.name || ""));
+    if (!found.length) {
+      voiceSelect.replaceChildren(new Option("Brak dostępnych głosów angielskich", ""));
+      voiceSelect.disabled = true;
+      if (previewButton) previewButton.disabled = true;
+      if (helpBox) helpBox.textContent = "Brak głosu angielskiego w przeglądarce. Zainstaluj głos angielski w systemie lub spróbuj funkcji Czytaj na głos w Microsoft Edge.";
       return;
     }
-    const phrase = String(text).replace(/\s+/g, " ").trim();
-    if (!phrase) { status("Nie znaleziono tekstu do odczytania."); return; }
-    if (activeButton === button && window.speechSynthesis.speaking) {
-      stop(); return;
+    const current = voiceSelect.value || getSavedVoice();
+    voices = found;
+    voiceSelect.replaceChildren();
+    for (const v of voices) {
+      const option = new Option(v.name + " (" + v.lang + ")", voiceKey(v));
+      voiceSelect.append(option);
     }
-    window.speechSynthesis.cancel();
-    resetButtons();
+    const preferred = voices.find(v => voiceKey(v) === current) || voices[0];
+    voiceSelect.value = voiceKey(preferred);
+    voiceSelect.disabled = false;
+    if (previewButton) previewButton.disabled = false;
+    if (helpBox) {
+      const premium = /natural|neural|premium|enhanced|online/i.test(preferred.name);
+      helpBox.textContent = premium
+        ? "Wybrano głos oznaczony przez system jako naturalny lub ulepszony. Kliknij „Sprawdź głos”, aby ocenić brzmienie."
+        : "Przeglądarka nie udostępnia tu rozpoznanego głosu naturalnego. Wypróbuj inne głosy z listy; jakość zależy od systemu i przeglądarki.";
+    }
+  }
+  function readText(button) {
+    const selector = button.dataset.e8Speak;
+    const node = selector ? document.querySelector(selector) : null;
+    if (!node || !document.querySelector(".e8-en-study")?.contains(node)) return "";
+    return node.dataset.speechText || node.innerText || node.textContent || "";
+  }
+  function play(raw, button) {
+    if (!synth) {
+      status("Odsłuch niedostępny w tej przeglądarce.");
+      return;
+    }
+    const voice = chosenVoice();
+    if (!voice) {
+      populateVoices();
+      status("Brak angielskiego głosu. Sprawdź ustawienia mowy w systemie lub skorzystaj z funkcji Czytaj na głos w Edge.");
+      return;
+    }
+    const text = String(raw || "").replace(/\s+/g, " ").trim();
+    if (!text) { status("Brak tekstu do odsłuchania."); return; }
+    if (activeButton === button) { stop(); return; }
+    stop(false);
+    const token = ++playToken;
     activeButton = button;
-    activeText = phrase;
-    utterance = new window.SpeechSynthesisUtterance(phrase);
-    utterance.lang = "en-GB";
-    const voice = englishVoice();
-    if (voice) {
-      utterance.voice = voice;
-      utterance.lang = voice.lang;
-    }
-    const rate = parseFloat(document.getElementById("e8-tts-rate")?.value || "0.9");
-    utterance.rate = Number.isFinite(rate) ? Math.min(1.3, Math.max(0.65, rate)) : 0.9;
-    utterance.pitch = 1;
-    utterance.onstart = () => {
-      if (activeButton !== button) return;
+    const u = new SpeechSynthesisUtterance(text);
+    activeUtterance = u;
+    u.voice = voice;
+    u.lang = voice.lang;
+    u.pitch = 1;
+    const rate = Number(rateSelect?.value || "1");
+    u.rate = Number.isFinite(rate) ? Math.min(1.2,Math.max(0.8,rate)) : 1;
+    const resetIfCurrent = () => {
+      if (token !== playToken) return false;
+      resetButtons();
+      return true;
+    };
+    u.onstart = () => {
+      if (token !== playToken) return;
       button.classList.add("is-speaking");
-      button.setAttribute("aria-pressed", "true");
       button.textContent = "Zatrzymaj odsłuch";
-      status("Czytanie po angielsku. Prędkość: " + utterance.rate + "×.");
+      button.setAttribute("aria-pressed","true");
+      status("Odtwarzanie: " + voice.name + " · " + u.rate + "×.");
     };
-    utterance.onend = () => {
-      if (activeButton !== button) return;
-      resetButtons();
-      status("Odsłuch zakończony.");
-    };
-    utterance.onerror = evt => {
-      if (activeButton !== button) return;
-      resetButtons();
-      if (evt.error !== "canceled" && evt.error !== "interrupted")
-        status("Nie udało się odczytać tekstu. Sprawdź głosy systemowe języka angielskiego.");
+    u.onend = () => { if (resetIfCurrent()) status("Odsłuch zakończony."); };
+    u.onerror = event => {
+      if (!resetIfCurrent()) return;
+      if (event.error !== "canceled" && event.error !== "interrupted")
+        status("Nie udało się uruchomić głosu. Zmień głos w menu lub użyj funkcji Czytaj na głos w Edge.");
     };
     try {
-      window.speechSynthesis.speak(utterance);
-      status("Uruchamianie angielskiego głosu…");
+      synth.speak(u);
+      status("Uruchamianie głosu: " + voice.name + "…");
     } catch (_) {
-      resetButtons();
-      status("Odsłuch jest niedostępny na tym urządzeniu.");
+      if (resetIfCurrent()) status("Nie udało się uruchomić tego głosu.");
     }
   }
-  function readSelection(button) {
+  function selectedEnglishText() {
     const selection = window.getSelection();
-    const selected = selection?.toString()?.trim() || "";
-    const container = selection?.anchorNode?.parentElement?.closest(".e8-speakable");
-    if (!selected || !container || !root()?.contains(container)) {
-      status("Najpierw zaznacz fragment angielskiego tekstu w opracowaniu.");
-      return;
-    }
-    speak(selected, button);
+    const text = selection ? selection.toString().trim() : "";
+    if (!text) return "";
+    const anchor = selection.anchorNode;
+    const element = anchor?.nodeType === 1 ? anchor : anchor?.parentElement;
+    if (!element?.closest(".e8-en-study .e8-speakable")) return "";
+    return text;
   }
   function init() {
-    if (!root()) return;
-    document.querySelectorAll("[data-e8-speak]").forEach(button => {
+    for (const button of readButtons) {
       button.dataset.defaultLabel = button.textContent.trim();
       button.type = "button";
-      if (!api) {
-        button.disabled = true;
-        button.title = "Synteza mowy niedostępna w tej przeglądarce";
-      }
+      button.setAttribute("aria-pressed","false");
+      if (!synthOK) button.disabled = true;
+    }
+    if (selectionButton && !synthOK) selectionButton.disabled = true;
+    if (stopButton && !synthOK) stopButton.disabled = true;
+    if (voiceSelect && !synthOK) voiceSelect.disabled = true;
+    if (previewButton && !synthOK) previewButton.disabled = true;
+
+    if (synthOK) {
+      populateVoices();
+      if ("onvoiceschanged" in synth) synth.addEventListener("voiceschanged", populateVoices);
+      window.setTimeout(populateVoices, 500);
+      window.setTimeout(populateVoices, 1800);
+    } else {
+      status("Twoja przeglądarka nie obsługuje syntezy mowy.");
+    }
+    document.addEventListener("selectionchange", () => {
+      const now = selectedEnglishText();
+      if (now) selectedText = now;
     });
-    document.querySelectorAll("[data-e8-speak-selection]").forEach(button => {
-      button.type = "button";
-      button.dataset.defaultLabel = button.textContent.trim();
-      if (!api) button.disabled = true;
-    });
-    const stopButton = document.getElementById("e8-tts-stop");
-    if (stopButton && !api) stopButton.disabled = true;
     document.addEventListener("click", event => {
-      const btn = event.target.closest("[data-e8-speak]");
-      if (btn && root()?.contains(btn)) speak(textFor(btn), btn);
-      const selectionBtn = event.target.closest("[data-e8-speak-selection]");
-      if (selectionBtn && root()?.contains(selectionBtn)) readSelection(selectionBtn);
-      const stopper = event.target.closest("#e8-tts-stop");
-      if (stopper) stop();
+      const read = event.target.closest(".e8-en-study [data-e8-speak]");
+      if (read) { play(readText(read),read); return; }
+      if (event.target.closest("#e8-tts-preview")) {
+        play("Hello! Welcome to your English exam practice. Choose the voice you like best, then listen to the text at a comfortable speed.",previewButton);
+        return;
+      }
+      if (event.target.closest("[data-e8-speak-selection]")) {
+        const selected = selectedEnglishText() || selectedText;
+        if (selected) play(selected,selectionButton);
+        else status("Zaznacz fragment angielskiego tekstu, a potem kliknij „Odsłuchaj zaznaczenie”.");
+        return;
+      }
+      if (event.target.closest("#e8-tts-stop")) stop();
     });
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden && api && window.speechSynthesis.speaking) stop();
+    voiceSelect?.addEventListener("change", () => {
+      stop(false);
+      saveVoice(voiceSelect.value);
+      const v = chosenVoice();
+      if (helpBox && v) helpBox.textContent = "Głos: " + v.name + ". Kliknij „Sprawdź głos”, aby go posłuchać.";
+      status("Wybrany głos: " + (v?.name || "brak") + ".");
     });
-    window.addEventListener("pagehide", () => { if (api) window.speechSynthesis.cancel(); });
-    status(api ? "Gotowe. Wybierz Odsłuchaj albo zaznacz fragment tekstu." :
-      "Twoja przeglądarka nie obsługuje syntezy mowy.");
+    window.addEventListener("pagehide", () => { if (synth) synth.cancel(); });
+    if (synthOK) status("Wybierz głos i kliknij „Sprawdź głos”, a potem odsłuchaj tekst.");
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
