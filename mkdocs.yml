@@ -3,6 +3,7 @@ site_description: Repozytorium materiałów i opracowań egzaminacyjnych.
 
 extra_css:
   - stylesheets/e8-modern.css
+  - stylesheets/e8-longread.css
 
 extra_javascript:
   - javascripts/e8-catalog.js
@@ -13,6 +14,7 @@ extra_javascript:
 nav:
   - Start: index.md
   - Arkusze PDF: pdfs.md
+  - Opracowanie: opracowania/polski-2026.md
   - Notatki (JP): notatki-jezyk-polski.md
   - Notatki (MAT): notatki-matematyka.md
   - Notatki (ANG): notatki-jezyk-angielski.md
