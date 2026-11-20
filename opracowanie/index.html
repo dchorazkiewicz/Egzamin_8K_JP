@@ -57,7 +57,17 @@
 
     
     
-  </head>
+  <!-- Redirect old Polish 2026 study links to the continuous article -->
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  if (params.get("subject") === "jezyk-polski" && params.get("year") === "2026" &&
+      params.get("name") === "jezyk-polski-2026-egzamin-osmoklasisty") {
+    window.location.replace(new URL("../opracowania/polski-2026/" + window.location.hash, window.location.href).href);
+  }
+})();
+</script>
+</head>
   
   
     
