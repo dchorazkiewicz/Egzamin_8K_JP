@@ -114,6 +114,11 @@
           title:"Czytaj opracowanie →",
           aria:"Pełne opracowanie HTML — język polski, egzamin główny 2026"
         },
+        "matematyka-2026-egzamin-osmoklasisty": {
+          url:"../opracowania/matematyka-2026/",
+          title:"Czytaj rozwiązania →",
+          aria:"Pełne rozwiązania HTML krok po kroku — matematyka 2026"
+        },
         "jezyk-angielski-2026-egzamin-osmoklasisty": {
           url:"../opracowania/angielski-2026/",
           title:"Czytaj i odsłuchaj →",
