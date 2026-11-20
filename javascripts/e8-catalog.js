@@ -103,6 +103,18 @@
     makeLink(record.links.exam, "Arkusz PDF ↗", true);
     makeLink(record.links.answers, "Odpowiedzi ↗", false);
     makeLink(record.links.transcript, "Transkrypcja ↗", false);
+    if (record.links.exam && record.links.answers) {
+      const fileName = decodeURIComponent(new URL(record.links.exam).pathname.split("/").pop() || "");
+      const stem = fileName.replace(/\.pdf$/i, "");
+      const study = new URL("../opracowanie/", location.href);
+      study.searchParams.set("subject", record.subject);
+      study.searchParams.set("year", String(record.year));
+      study.searchParams.set("name", stem);
+      const a = el("a", "e8-file-link e8-file-link-study", "Opracowanie →");
+      a.href = study.href;
+      a.setAttribute("aria-label", "Opracowanie — " + info.name + " " + record.year + ", " + record.title);
+      links.append(a);
+    }
     card.append(links);
     return card;
   }
