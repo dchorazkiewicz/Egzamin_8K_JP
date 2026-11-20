@@ -24,8 +24,9 @@
     const base=new URL("../pdf/"+subject+"/"+year+"/",location.href);
     const pdf=new URL(name+".pdf",base).href;
     const keyPdf=new URL(name+"-odpowiedzi.pdf",base).href;
-    const demo=subject==="matematyka" && year==="2026" && name==="matematyka-2026-egzamin-osmoklasisty";
-    const tasks=demo ? (window.E8_STUDY_MATH_2026||[]) : [];
+    const isMath=subject==="matematyka" && year==="2026" && name==="matematyka-2026-egzamin-osmoklasisty";
+    const isPolish=subject==="jezyk-polski" && year==="2026" && name==="jezyk-polski-2026-egzamin-osmoklasisty";
+    const tasks=isMath ? (window.E8_STUDY_MATH_2026||[]) : isPolish ? (window.E8_STUDY_POLISH_2026||[]) : [];
     root.innerHTML=[
       '<section class="e8-study-hero">',
       ' <div><a class="e8-study-back" href="../pdfs/">← Powrót do katalogu</a>',
@@ -35,17 +36,17 @@
       ' <a id="e8-full-key" target="_blank" rel="noopener noreferrer">Klucz CKE ↗</a></div>',
       '</section>',
       '<div id="e8-study-math" class="e8-study-layout" hidden>',
-      ' <aside class="e8-study-nav"><strong>20 zadań</strong><span>Matematyka · maj 2026</span><nav id="e8-task-nav" aria-label="Nawigacja po zadaniach"></nav></aside>',
+      ' <aside class="e8-study-nav"><strong id="e8-lesson-count">Zadania</strong><span id="e8-lesson-subject">Maj 2026</span><nav id="e8-task-nav" aria-label="Nawigacja po zadaniach"></nav></aside>',
       ' <main class="e8-study-main">',
       ' <div class="e8-study-task-top"><div><span id="e8-task-category"></span><h2 id="e8-task-heading"></h2></div><span id="e8-task-points"></span></div>',
       ' <div class="e8-study-panes">',
       '  <section class="e8-study-pane"><div class="e8-study-panel-head"><strong>Treść i rysunki z arkusza</strong><a id="e8-question-external" target="_blank" rel="noopener noreferrer">Otwórz PDF ↗</a></div>',
-      '    <iframe id="e8-question-view" title="Oryginalny arkusz egzaminacyjny" loading="lazy"></iframe><p class="e8-panel-foot">Zachowano wygląd oryginalnego PDF, w tym zakres pierwiastków, kursywę, pogrubienia i rysunki.</p></section>',
+      '    <iframe id="e8-question-view" title="Oryginalny arkusz egzaminacyjny" loading="lazy"></iframe><p class="e8-panel-foot">Zachowano oryginalny układ tekstu, pogrubienia, kursywę, podkreślenia, wzory i ilustracje.</p><a id="e8-reading-source" class="e8-reading-link" target="_blank" rel="noopener noreferrer" hidden>Otwórz tekst źródłowy, do którego odnosi się zadanie ↗</a></section>',
       '  <section class="e8-study-pane e8-study-lesson"><div class="e8-study-panel-head"><strong>Rozwiązanie krok po kroku</strong><span>Klucz CKE · wersja X</span></div>',
       '    <p class="e8-study-hint">Spróbuj rozwiązać zadanie samodzielnie, zanim sprawdzisz odpowiedź.</p>',
       '    <button type="button" class="e8-study-reveal" id="e8-reveal" aria-expanded="false">Pokaż odpowiedź i omówienie</button>',
       '    <div id="e8-solution" hidden><div id="e8-task-answer" class="e8-study-answer"></div><h3>Jak dojść do wyniku?</h3>',
-      '      <ol id="e8-task-steps"></ol><div class="e8-study-trap"><strong>Typowy błąd</strong><p id="e8-task-tip"></p></div>',
+      '      <ol id="e8-task-steps"></ol><div id="e8-task-example-wrap" class="e8-study-example" hidden><strong>Przykładowa odpowiedź autorska</strong><p id="e8-task-example"></p></div><div id="e8-task-models"></div><div class="e8-study-trap"><strong>Typowy błąd</strong><p id="e8-task-tip"></p></div>',
       '      <a id="e8-key-external" target="_blank" rel="noopener noreferrer">Sprawdź fragment oficjalnego klucza ↗</a></div>',
       '  </section>',
       ' </div>',
@@ -70,7 +71,11 @@
       root.querySelector("#e8-compare-key-open").href=keyPdf;
       return;
     }
-    root.querySelector("#e8-study-intro").textContent="Pełne opracowanie 20 zadań z 12 maja 2026 r. · odpowiedzi dla wersji X · oryginalny układ PDF i wyjaśnienia sprawdzone z kluczem CKE.";
+    root.querySelector("#e8-study-intro").textContent=isPolish ?
+      "18 zadań z 11 maja 2026 r. · wersja X · zachowane oryginalne wyróżnienia w PDF, odpowiedzi i omówienia na podstawie zasad CKE." :
+      "20 zadań z 12 maja 2026 r. · wersja X · oryginalny układ PDF i wyjaśnienia sprawdzone z kluczem CKE.";
+    root.querySelector("#e8-lesson-count").textContent=tasks.length+" zadań";
+    root.querySelector("#e8-lesson-subject").textContent=subjects[subject]+" · maj 2026";
     root.querySelector("#e8-study-math").hidden=false;
     let current=0;
     const nav=root.querySelector("#e8-task-nav");
@@ -90,14 +95,27 @@
       const t=tasks[current];
       root.querySelector("#e8-task-heading").textContent="Zadanie "+t.n;
       root.querySelector("#e8-task-category").textContent=t.topic;
-      root.querySelector("#e8-task-points").textContent=t.n<15?"0–1 pkt":({15:"0–2 pkt",16:"0–3 pkt",17:"0–3 pkt",18:"0–2 pkt",19:"0–3 pkt",20:"0–3 pkt"}[t.n]);
+      root.querySelector("#e8-task-points").textContent=t.points || (t.n<15?"0–1 pkt":({15:"0–2 pkt",16:"0–3 pkt",17:"0–3 pkt",18:"0–2 pkt",19:"0–3 pkt",20:"0–3 pkt"}[t.n]));
       const pageUrl=pdf+"#page="+t.page;
       root.querySelector("#e8-question-view").src=pageUrl;
       root.querySelector("#e8-question-external").href=pageUrl;
+      const sourceLink=root.querySelector("#e8-reading-source");
+      sourceLink.hidden=!t.reading;
+      if(t.reading) sourceLink.href=pdf+"#page="+t.reading;
       root.querySelector("#e8-task-answer").textContent="Odpowiedź: "+t.answer;
       const list=root.querySelector("#e8-task-steps"); list.replaceChildren();
       t.steps.forEach(step=>list.append(element("li","",step)));
       root.querySelector("#e8-task-tip").textContent=t.tip;
+      const example=root.querySelector("#e8-task-example-wrap");
+      example.hidden=!t.example;
+      root.querySelector("#e8-task-example").textContent=t.example || "";
+      const models=root.querySelector("#e8-task-models");
+      models.replaceChildren();
+      if(Array.isArray(t.models)) for (const model of t.models) {
+        const box=element("section","e8-study-example e8-study-model");
+        box.append(element("strong","",model.title),element("p","",model.text));
+        models.append(box);
+      }
       root.querySelector("#e8-key-external").href=keyPdf+"#page="+t.key;
       root.querySelector("#e8-counter").textContent=(current+1)+" / "+tasks.length;
       root.querySelector("#e8-prev").disabled=current===0;
