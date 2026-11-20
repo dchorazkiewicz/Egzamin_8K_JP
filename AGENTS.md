@@ -57,3 +57,12 @@ Sprawdzone źródła → strona HTML z **rzeczywiście opracowanymi** zadaniami 
 - **Polski:** rozbudowa opracowań HTML o kolejne sesje i lata, kontrola kryteriów oceniania wypowiedzi pisemnych i wiernego formatowania tekstu.
 - **Matematyka 2026:** kompletne opracowanie 20 zadań w `docs/opracowania/matematyka-2026.md`, 74 kolorowo oznaczone etapy i wskazówki punktowania zadań 15–20. Matematyka w kolejnych latach powinna wykorzystywać ten układ: dane, sposób, kolejne równania, kontrola, ewentualne alternatywne rozwiązania; bez wyświetlania podglądu PDF jako podstawowego interfejsu.
 - **Angielski:** opracowania z czytaniem, słuchaniem, funkcjami językowymi i pisaniem. Oddzielaj nagranie CKE od autorskiego TTS; oferuj odsłuch poszczególnych akapitów, zatrzymanie i wolniejsze tempo. Wskazuj poziom weryfikacji każdego zestawu.
+
+## Matematyka — rygor zapisu i sposobu rozwiązania
+
+- Opracowania matematyczne **muszą** stosować prawdziwy LaTeX renderowany przez MathJax; nie stosować tekstu ASCII do dzielenia, pierwiastków, indeksów, wykładników, potęg i ułamków.
+- Każde zadanie ma strukturę: dane w LaTeX → metoda → kolejne równania lub przekształcenia → wynik → kontrola; dla zadań otwartych także punktowanie. Nie wolno zastępować pełnych rachunków samą literą odpowiedzi ani skokiem od równania do wyniku.
+- Wyrównywać rachunki przez `\\begin{aligned}...\\end{aligned}`; używać `\\frac{a}{b}`, `\\sqrt{...}`, `\\mathrm{cm}^2`, `\\boxed{...}`. Pilnować, że kreska pierwiastka obejmuje dokładnie właściwe wyrażenie.
+- Wzory są renderowane przez `docs/javascripts/e8-mathjax.js`, a styluje je `docs/stylesheets/e8-math.css`. Skrypt próbuje jsDelivr, a w razie braku dostępności korzysta z unpkg. Nie usuwać informacji o błędach ładowania.
+- Matematyka 2026: `docs/opracowania/matematyka-2026.md` zawiera 74 bloki matematyczne LaTeX w 20 zadaniach, 20 bloków danych i 20 zapisanych matematycznie odpowiedzi. Każdą nową sesję sprawdzać wizualnie z arkuszem danej wersji X/Y.
+- **QA:** sprawdzić wyrenderowane wzory w przeglądarce desktop i mobile, a nie tylko obecność ukośników w pliku źródłowym. Równania mają być widoczne także przy zawijaniu wąskiego ekranu. Kontrola syntaktyczna LaTeX nie zastępuje kontroli matematycznej.
