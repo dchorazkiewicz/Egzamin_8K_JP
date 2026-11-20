@@ -319,3 +319,41 @@ body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", 
   .e8-feature-study {flex-direction:column;align-items:flex-start;padding:1rem;}
   .e8-feature-study b {width:100%;}
 }
+
+
+/* 2026-11: visible warm-orange study action, restrained glow. */
+.md-typeset a.e8-file-link.e8-file-link-study,
+.md-typeset a.e8-file-link-study,
+.e8-exam-card .e8-file-link-study {
+  background: linear-gradient(135deg, #fff0d6 0%, #ffcf87 100%) !important;
+  border: 1px solid #eaa141 !important;
+  color: #713706 !important;
+  font-weight: 800 !important;
+  box-shadow:
+    0 0 0 1px rgba(240, 159, 50, .13),
+    0 0 16px rgba(255, 161, 53, .38),
+    0 4px 12px rgba(191, 102, 18, .11) !important;
+  text-shadow: none !important;
+  transition: background .2s ease, box-shadow .2s ease, transform .2s ease !important;
+}
+.md-typeset a.e8-file-link.e8-file-link-study:hover,
+.md-typeset a.e8-file-link-study:hover,
+.e8-exam-card .e8-file-link-study:hover,
+.md-typeset a.e8-file-link-study:focus-visible {
+  background: linear-gradient(135deg, #ffe3b1, #ffc56b) !important;
+  border-color: #d78124 !important;
+  color: #632d00 !important;
+  box-shadow: 0 0 21px rgba(255, 152, 35, .50), 0 5px 15px rgba(191,102,18,.17) !important;
+  transform: translateY(-1px);
+}
+.e8-exam-card .e8-file-link-study:focus-visible {
+  outline: 3px solid #d77d20 !important;
+  outline-offset: 3px;
+}
+[data-md-color-scheme="slate"] .e8-exam-card .e8-file-link-study {
+  background: linear-gradient(135deg, #ffe2ad, #ffba59) !important;
+  color: #482603 !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .e8-exam-card .e8-file-link-study { transition: none !important; }
+}
