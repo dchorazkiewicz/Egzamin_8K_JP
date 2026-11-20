@@ -6,6 +6,8 @@ extra_css:
 
 extra_javascript:
   - javascripts/e8-catalog.js
+  - javascripts/e8-study-data.js
+  - javascripts/e8-study.js
 
 nav:
   - Start: index.md
