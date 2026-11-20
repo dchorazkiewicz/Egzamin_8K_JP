@@ -7,6 +7,7 @@ extra_css:
   - stylesheets/e8-longread.css
   - stylesheets/e8-type-scale.css
   - stylesheets/e8-english.css
+  - stylesheets/e8-math.css
 
 extra_javascript:
   - javascripts/e8-catalog.js
