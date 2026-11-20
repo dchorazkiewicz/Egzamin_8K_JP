@@ -5,6 +5,10 @@ Linki prowadzą do plików PDF trzymanych w repozytorium (kopiowanych do `site/`
 ## Język polski
 
 ???+ info "2026"
+    - [czerwiec egzamin osmoklasisty dodatkowy odpowiedzi](../pdf/jezyk-polski/2026/jezyk-polski-2026-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf)
+    - [czerwiec egzamin osmoklasisty dodatkowy](../pdf/jezyk-polski/2026/jezyk-polski-2026-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf)
+    - [egzamin osmoklasisty odpowiedzi](../pdf/jezyk-polski/2026/jezyk-polski-2026-egzamin-osmoklasisty-odpowiedzi.pdf)
+    - [egzamin osmoklasisty](../pdf/jezyk-polski/2026/jezyk-polski-2026-egzamin-osmoklasisty.pdf)
     - [styczen egzamin osmoklasisty probny odpowiedzi](../pdf/jezyk-polski/2026/jezyk-polski-2026-styczen-egzamin-osmoklasisty-probny-odpowiedzi.pdf)
     - [styczen egzamin osmoklasisty probny](../pdf/jezyk-polski/2026/jezyk-polski-2026-styczen-egzamin-osmoklasisty-probny.pdf)
 
@@ -67,6 +71,10 @@ Linki prowadzą do plików PDF trzymanych w repozytorium (kopiowanych do `site/`
 ## Matematyka
 
 ???+ info "2026"
+    - [czerwiec egzamin osmoklasisty dodatkowy odpowiedzi](../pdf/matematyka/2026/matematyka-2026-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf)
+    - [czerwiec egzamin osmoklasisty dodatkowy](../pdf/matematyka/2026/matematyka-2026-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf)
+    - [egzamin osmoklasisty odpowiedzi](../pdf/matematyka/2026/matematyka-2026-egzamin-osmoklasisty-odpowiedzi.pdf)
+    - [egzamin osmoklasisty](../pdf/matematyka/2026/matematyka-2026-egzamin-osmoklasisty.pdf)
     - [styczen egzamin osmoklasisty probny odpowiedzi](../pdf/matematyka/2026/matematyka-2026-styczen-egzamin-osmoklasisty-probny-odpowiedzi.pdf)
     - [styczen egzamin osmoklasisty probny](../pdf/matematyka/2026/matematyka-2026-styczen-egzamin-osmoklasisty-probny.pdf)
 
@@ -129,6 +137,12 @@ Linki prowadzą do plików PDF trzymanych w repozytorium (kopiowanych do `site/`
 ## Język angielski
 
 ???+ info "2026"
+    - [czerwiec egzamin osmoklasisty dodatkowy odpowiedzi](../pdf/jezyk-angielski/2026/jezyk-angielski-2026-czerwiec-egzamin-osmoklasisty-dodatkowy-odpowiedzi.pdf)
+    - [czerwiec egzamin osmoklasisty dodatkowy transkrypcja](../pdf/jezyk-angielski/2026/jezyk-angielski-2026-czerwiec-egzamin-osmoklasisty-dodatkowy-transkrypcja.pdf)
+    - [czerwiec egzamin osmoklasisty dodatkowy](../pdf/jezyk-angielski/2026/jezyk-angielski-2026-czerwiec-egzamin-osmoklasisty-dodatkowy.pdf)
+    - [egzamin osmoklasisty odpowiedzi](../pdf/jezyk-angielski/2026/jezyk-angielski-2026-egzamin-osmoklasisty-odpowiedzi.pdf)
+    - [egzamin osmoklasisty transkrypcja](../pdf/jezyk-angielski/2026/jezyk-angielski-2026-egzamin-osmoklasisty-transkrypcja.pdf)
+    - [egzamin osmoklasisty](../pdf/jezyk-angielski/2026/jezyk-angielski-2026-egzamin-osmoklasisty.pdf)
     - [styczen egzamin osmoklasisty probny odpowiedzi](../pdf/jezyk-angielski/2026/jezyk-angielski-2026-styczen-egzamin-osmoklasisty-probny-odpowiedzi.pdf)
     - [styczen egzamin osmoklasisty probny transkrypcja](../pdf/jezyk-angielski/2026/jezyk-angielski-2026-styczen-egzamin-osmoklasisty-probny-transkrypcja.pdf)
     - [styczen egzamin osmoklasisty probny](../pdf/jezyk-angielski/2026/jezyk-angielski-2026-styczen-egzamin-osmoklasisty-probny.pdf)
