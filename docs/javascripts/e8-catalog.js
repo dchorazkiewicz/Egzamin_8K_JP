@@ -184,9 +184,16 @@
     function syncSubjectNavigation() {
       const navs = document.querySelectorAll(".md-tabs__item, .md-nav--primary > .md-nav__list > .md-nav__item");
       for (const item of navs) {
-        const link = item.querySelector("a[data-e8-menu]");
+        // Data attributes are present on the live navigation. After a
+        // full MkDocs rebuild the same links are rendered without them.
+        const link = item.querySelector("a[data-e8-menu], a.md-tabs__link, a.md-nav__link");
         if (!link) continue;
-        const target = link.getAttribute("data-e8-menu");
+        let target = link.getAttribute("data-e8-menu");
+        if (!target) {
+          const href = new URL(link.href, location.href);
+          if (href.pathname.endsWith("/pdfs/")) target = href.searchParams.get("subject") || "arkusze";
+          else if (href.pathname.endsWith("/Egzamin_8K_JP/")) target = "start";
+        }
         const desired = state.subject === "all" ? "arkusze" : state.subject;
         const active = target === desired;
         item.classList.toggle("md-tabs__item--active", active && item.classList.contains("md-tabs__item"));
