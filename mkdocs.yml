@@ -5,6 +5,7 @@ extra_css:
   - stylesheets/e8-modern.css
   - stylesheets/e8-dropdown-fix.css
   - stylesheets/e8-longread.css
+  - stylesheets/e8-type-scale.css
 
 extra_javascript:
   - javascripts/e8-catalog.js
