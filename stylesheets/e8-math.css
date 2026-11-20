@@ -139,3 +139,94 @@
  .e8-m-eq{font-size:14px}
 }
 @media(prefers-reduced-motion:reduce){.e8-math-page html{scroll-behavior:auto}}
+
+
+/* Mathematical typography: MathJax replaces old monospace equations */
+.e8-math-longread .e8-m-eq.e8-math-display {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+  font-family: "Times New Roman", "STIX Two Math", Cambria, serif;
+  font-size: 18px !important;
+  line-height: 1.7 !important;
+  font-weight: 400 !important;
+  text-align: left !important;
+  white-space: normal !important;
+  overflow-wrap: normal !important;
+  border-left: 3px solid #4776c5;
+  border-radius: 0 9px 9px 0;
+  background: rgba(255,255,255,.86);
+  color: #19345b;
+  padding: 12px 15px !important;
+}
+.e8-math-longread .e8-m-step-2 .e8-math-display {
+  border-left-color:#8e65d0;
+}
+.e8-math-longread .e8-m-step-3 .e8-math-display {
+  border-left-color:#269b82;
+}
+[data-md-color-scheme="slate"] .e8-math-longread .e8-math-display {
+  background:rgba(0,0,0,.23);
+  color:#eaf1ff;
+}
+.e8-math-longread .e8-m-eq mjx-container[jax="CHTML"] {
+  font-size: 1.04em;
+  max-width: none;
+  color: inherit;
+}
+.e8-math-longread .e8-m-eq mjx-container[display="true"] {
+  margin: .2em 0 .3em !important;
+  text-align: left !important;
+}
+.e8-math-longread .e8-math-display mjx-container {
+  text-align: left;
+}
+.e8-math-longread .e8-m-eq mjx-math {
+  padding: 2px 4px;
+}
+.e8-mathjax-status {
+  margin: 8px 0 0 !important;
+  padding: 10px 12px;
+  border:1px solid #c8d5f7;
+  border-radius:8px;
+  color:#405da4;
+  background:#f0f5ff;
+  font-size:14px!important;
+}
+.e8-mathjax-status.is-error {
+  color:#8b471c;
+  background:#fff4e5;
+  border-color:#eac8a0;
+}
+.e8-math-longread .e8-m-given {
+  padding:12px 14px;
+  margin:10px 0 14px;
+  background:var(--m-soft);
+  border:1px solid var(--m-border);
+  border-radius:9px;
+  font-size:16px;
+  overflow-x:auto;
+}
+.e8-math-longread .e8-m-given strong {
+  display:inline-block;
+  color:var(--m-accent);
+  font-size:13px;
+  font-weight:850;
+  margin-bottom:7px;
+}
+.e8-math-longread .e8-m-given mjx-container {
+  margin:4px 0;
+}
+.e8-math-longread .e8-m-answer mjx-container {
+  font-size:1.08em;
+}
+.e8-math-longread .e8-m-options mjx-container {
+  margin:0 2px;
+}
+@media(max-width:760px){
+ .e8-math-longread .e8-m-eq.e8-math-display {font-size:16px!important;padding:10px 10px!important;}
+ .e8-math-longread .e8-m-eq mjx-container[jax="CHTML"] {font-size:1em;}
+}
