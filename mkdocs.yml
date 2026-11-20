@@ -1,6 +1,12 @@
 site_name: Egzamin Ósmoklasisty
 site_description: Repozytorium materiałów i opracowań egzaminacyjnych.
 
+extra_css:
+  - stylesheets/e8-modern.css
+
+extra_javascript:
+  - javascripts/e8-catalog.js
+
 nav:
   - Start: index.md
   - Arkusze PDF: pdfs.md
@@ -13,14 +19,14 @@ theme:
   language: pl
   palette:
     - scheme: default
-      primary: green
-      accent: green
+      primary: indigo
+      accent: indigo
       toggle:
         icon: material/brightness-7
         name: Tryb ciemny
     - scheme: slate
-      primary: green
-      accent: green
+      primary: indigo
+      accent: indigo
       toggle:
         icon: material/brightness-4
         name: Tryb jasny
