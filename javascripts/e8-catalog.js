@@ -152,9 +152,6 @@
       '    <p>Wybierz przedmiot, rok i termin. Otwieraj arkusze, klucze odpowiedzi oraz transkrypcje bez przekopywania się przez listy plików.</p></div>',
       '  <div class="e8-catalog-count"><strong id="e8-total-exams"></strong><span>zestawów egzaminacyjnych</span></div>',
       '</section>',
-      '<a class="e8-feature-study" href="../opracowania/polski-2026/" aria-label="Przejdź do pełnego opracowania języka polskiego 2026">',
-      '  <span><small>GOTOWE OPRACOWANIE HTML</small><strong>Język polski 2026 · 18 zadań krok po kroku</strong><em>Pełne teksty, pytania i odpowiedzi na jednej przewijanej stronie</em></span><b>Otwórz opracowanie →</b>',
-      '</a>',
       '<section class="e8-toolbar" aria-label="Filtry arkuszy">',
       ' <div class="e8-toolbar-row">',
       '  <div class="e8-filters" role="group" aria-label="Przedmiot">',
@@ -183,8 +180,32 @@
     years.forEach(year => { const option = el("option", "", String(year)); option.value = String(year); yearSelect.append(option); });
     const resultNode = root.querySelector("#e8-results");
     const chips = Array.from(root.querySelectorAll("[data-filter-subject]"));
+    // Keep the top navigation and catalog headline consistent with the filter.
+    function syncSubjectNavigation() {
+      const navs = document.querySelectorAll(".md-tabs__item, .md-nav--primary > .md-nav__list > .md-nav__item");
+      for (const item of navs) {
+        const link = item.querySelector("a[data-e8-menu]");
+        if (!link) continue;
+        const target = link.getAttribute("data-e8-menu");
+        const desired = state.subject === "all" ? "arkusze" : state.subject;
+        const active = target === desired;
+        item.classList.toggle("md-tabs__item--active", active && item.classList.contains("md-tabs__item"));
+        item.classList.toggle("md-nav__item--active", active && item.classList.contains("md-nav__item"));
+        link.classList.toggle("md-nav__link--active", active && link.classList.contains("md-nav__link"));
+        if (active) link.setAttribute("aria-current","page");
+        else link.removeAttribute("aria-current");
+      }
+      const name = state.subject === "all" ? "Wszystkie arkusze" : "Arkusze · " + subjectInfo[state.subject].name;
+      root.querySelector("#e8-catalog-heading").textContent = name;
+      const description = state.subject === "all"
+        ? "Wybierz przedmiot, rok i termin. Każdy egzamin ma swój kafelek z arkuszem i odpowiedziami."
+        : "Wybierz rocznik i termin. Otwórz odpowiedni kafelek, aby przejść do arkusza, odpowiedzi lub dostępnego opracowania.";
+      root.querySelector(".e8-catalog-hero p").textContent = description;
+    }
+
 
     function render() {
+      syncSubjectNavigation();
       for (const button of chips) {
         const active = button.dataset.filterSubject === state.subject;
         button.classList.toggle("is-active", active);
