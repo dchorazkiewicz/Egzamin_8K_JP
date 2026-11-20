@@ -59,3 +59,43 @@
   .e8-en-choices { grid-template-columns:1fr; }
   .e8-en-lesson-links {gap:10px;}
 }
+
+
+/* Voice selection is as important as speed for natural listening. */
+.e8-en-listenbar #e8-tts-voice {
+  min-width: 205px;
+  max-width: min(340px,100%);
+  flex: 1 1 220px;
+  height: 43px !important;
+  line-height: normal !important;
+  font-size: var(--e8-font-small,14px) !important;
+}
+.e8-en-listenbar #e8-tts-rate {
+  height: 43px !important;
+  line-height: normal !important;
+}
+.e8-en-listenbar label { font-size:var(--e8-font-small,14px); color:var(--en-ink); font-weight:650; }
+.e8-en-listenbar #e8-tts-preview {
+  border-color:#5666ce;
+  background:#555fce;
+  color:#fff;
+}
+.e8-en-listenbar #e8-tts-preview:hover { background:#434fbb; color:#fff; }
+.e8-en-listenbar .e8-tts-voice-help {
+  flex-basis:100%;
+  margin:0!important;
+  font-size:var(--e8-font-small,14px)!important;
+  color:var(--en-muted);
+  line-height:1.55!important;
+}
+.e8-en-listenbar .e8-tts-feedback {
+  border-top:1px solid var(--en-border);
+  padding-top:7px;
+  font-size:var(--e8-font-small,14px);
+}
+@media (max-width:740px) {
+  .e8-en-listenbar { align-items:stretch; }
+  .e8-en-listenbar #e8-tts-voice { flex:1 1 100%; min-width:0; width:100%; max-width:100%; }
+  .e8-en-listenbar #e8-tts-rate { flex:1 1 145px; }
+  .e8-en-listenbar button { min-height:43px; }
+}
