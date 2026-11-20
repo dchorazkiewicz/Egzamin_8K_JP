@@ -49,3 +49,7 @@ mkdocs gh-deploy --force
 ```
 
 **Status:** angielski 2026 ma kompletną mapę 14 zadań z odpowiedziami X i pilotażowe, autorskie teksty do odsłuchu. Nie należy mylić ich z dosłownym odtworzeniem całego oryginalnego arkusza i nagrań CKE. Pełne weryfikowanie każdej adaptacji pozostaje osobnym etapem.
+
+### Standard matematyczny
+
+Opracowanie matematyki 2026 korzysta z **LaTeX + MathJax**: 20 zadań, 74 etapy obliczeń, 20 zestawów danych i 20 wyników końcowych. Rachunki są podzielone na logiczne kroki, w równaniach używane są poprawne ułamki, pierwiastki, potęgi, jednostki i znaki równości. Więcej reguł w [AGENTS.md](AGENTS.md).
