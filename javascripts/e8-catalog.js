@@ -103,15 +103,27 @@
     makeLink(record.links.exam, "Arkusz PDF ↗", true);
     makeLink(record.links.answers, "Odpowiedzi ↗", false);
     makeLink(record.links.transcript, "Transkrypcja ↗", false);
-    // Only published, fully authored HTML lessons get an "Opracowanie" link.
-    if (record.subject === "jezyk-polski" && record.year === 2026 &&
-        record.links.exam && record.links.answers) {
+    // Show links only to pages that exist; Polish is an edition,
+    // English 2026 is a clearly labelled educational pilot with TTS.
+    if (record.year === 2026 && record.links.exam && record.links.answers) {
       const fileName = decodeURIComponent(new URL(record.links.exam).pathname.split("/").pop() || "");
       const stem = fileName.replace(/\.pdf$/i, "");
-      if (stem === "jezyk-polski-2026-egzamin-osmoklasisty") {
-        const a = el("a", "e8-file-link e8-file-link-study", "Czytaj opracowanie →");
-        a.href = new URL("../opracowania/polski-2026/", location.href).href;
-        a.setAttribute("aria-label", "Pełne opracowanie HTML — język polski, egzamin główny 2026");
+      const published = {
+        "jezyk-polski-2026-egzamin-osmoklasisty": {
+          url:"../opracowania/polski-2026/",
+          title:"Czytaj opracowanie →",
+          aria:"Pełne opracowanie HTML — język polski, egzamin główny 2026"
+        },
+        "jezyk-angielski-2026-egzamin-osmoklasisty": {
+          url:"../opracowania/angielski-2026/",
+          title:"Czytaj i odsłuchaj →",
+          aria:"Pilotażowe opracowanie HTML z odsłuchem — język angielski 2026"
+        }
+      }[stem];
+      if (published) {
+        const a = el("a", "e8-file-link e8-file-link-study", published.title);
+        a.href = new URL(published.url, location.href).href;
+        a.setAttribute("aria-label", published.aria);
         links.append(a);
       }
     }
